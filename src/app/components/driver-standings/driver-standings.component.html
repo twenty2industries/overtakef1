@@ -1,12 +1,13 @@
 <section>
   <div class="select-menu">
-    <button (click)="openMenu = 'driver-standing'">DRIVERS</button>
-    <button (click)="openMenu = 'constructor-standing'">CONSTRUCTOR</button>
+    <button (click)="openMenu = 'driver-standing'" [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-1.jpg)'">DRIVERS</button>
+    <button (click)="openMenu = 'constructor-standing'" [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
   </div>
 
   <div class="standing-cards">
     @switch (openMenu) {
       @case ('constructor-standing') {
+        <div class="fade-wrapper" @fadeSlide>
         @for (team of constructosStandings; track $index) {
         <div class="constructor-cards" [style.background]=" 'linear-gradient(to right,' + team.teamColor + ', transparent)'">
           <div class="team-constructor-name">
@@ -15,13 +16,15 @@
             <div class="first-name">{{team.team}}</div>
           </div>
           <div class="position-points">
-            <div class="position">position place</div>
-            <div class="constructor-points">{{team.points}}pts</div>
+            <div class="position">#{{$index + 1}}</div>
+            <div class="constructor-points">{{team.points}} pts</div>
           </div> 
         </div>
     }
+        </div>
 
     } @case ('driver-standing') {
+    <div class="fade-wrapper" @fadeSlide>
       @for (driver of driverStandings; track $index) {
         <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
           <div class="team-driver-name">
@@ -32,28 +35,31 @@
             </div>
           </div>
           <div class="position-points">
-            <div class="position">#{{driver.position}}</div>
-            <div class="driver-points">{{driver.points}}pts</div>
+            <div class="position">#{{$index + 1}}</div>
+            <div class="driver-points">{{driver.points}} pts</div>
           </div>
         </div>
       }
-    }
+    </div>
+  }
     @default {
-      @for (driver of driverStandings; track $index) {
-        <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
-          <div class="team-driver-name">
-            <div class="team-logo"><img [src]="driver.logoPath"></div>
-            <div class="hyphen"></div>
-            <div class="driver-name">
-              <div class="first-name">{{driver.driverName}}</div>
+      <div class="fade-wrapper" @fadeSlide>
+        @for (driver of driverStandings; track $index) {
+          <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+            <div class="team-driver-name">
+              <div class="team-logo"><img [src]="driver.logoPath"></div>
+              <div class="hyphen"></div>
+              <div class="driver-name">
+                <div class="first-name">{{driver.driverName}}</div>
+              </div>
+            </div>
+            <div class="position-points">
+              <div class="position">#{{driver.position}}</div>
+              <div class="driver-points">{{driver.points}} pts</div>
             </div>
           </div>
-          <div class="position-points">
-            <div class="position">#{{driver.position}}</div>
-            <div class="driver-points">{{driver.points}}pts</div>
-          </div>
+          }
         </div>
-        }
       }
     }
   </div>
