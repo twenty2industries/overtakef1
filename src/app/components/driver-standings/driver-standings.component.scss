@@ -29,21 +29,20 @@ section {
       flex-direction: column;
       display: flex;
       justify-content: space-between;
-      margin-top: 1rem;
+      margin: 1rem 0rem;
       border-radius: 10px;
       width: 85%;
       height: 22vh;
-      
+
 
       .team-driver-name {
+        align-items: center;
         display: flex;
         color: white;
         font-size: 2.4em;
-        .team-logo {
-          display: flex;
-          align-items: center;
-        }
+
       }
+
     }
   }
 
@@ -52,19 +51,48 @@ section {
     flex-direction: column;
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin: 1rem 0rem;
     border-radius: 10px;
     width: 85%;
     height: 22vh;
 
     .team-constructor-name {
+      align-items: center;
       display: flex;
-        color: white;
-        font-size: 2.4em;
+      color: white;
+      font-size: 2.4em;
+
       .team-logo {
         display: flex;
         align-items: center;
       }
     }
+  }
+
+  .hyphen {
+    margin: 0% 5%;
+    height: 100%;
+    width: 2px;
+    background-color: black;
+  }
+
+
+  .team-logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 80px;
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+
+
+  .position-points {
+    display: flex;
+    color: white;
+    flex-direction: column;
+    font-size: 2em;
   }
 }

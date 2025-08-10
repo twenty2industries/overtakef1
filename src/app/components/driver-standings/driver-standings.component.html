@@ -7,18 +7,17 @@
   <div class="standing-cards">
     @switch (openMenu) {
       @case ('constructor-standing') {
-        @for (driver of driverStandings; track $index) {
-        <div class="constructor-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+        @for (team of constructosStandings; track $index) {
+        <div class="constructor-cards" [style.background]=" 'linear-gradient(to right,' + team.teamColor + ', transparent)'">
           <div class="team-constructor-name">
-            <div class="team-logo">LOGO</div>
-            <div class="hyphen">|</div>
-            <div class="first-name">{{driver.team}}</div>
+            <div class="team-logo"><img [src]="team.logoPath"></div>
+            <div class="hyphen"></div>
+            <div class="first-name">{{team.team}}</div>
           </div>
-          <!-- 
           <div class="position-points">
             <div class="position">position place</div>
-            <div class="constructor-points">213pts</div>
-          </div> -->
+            <div class="constructor-points">{{team.points}}pts</div>
+          </div> 
         </div>
     }
 
@@ -26,15 +25,15 @@
       @for (driver of driverStandings; track $index) {
         <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
           <div class="team-driver-name">
-            <div class="team-logo">LOGO</div>
-            <div class="hyphen">|</div>
+            <div class="team-logo"><img [src]="driver.logoPath"></div>
+            <div class="hyphen"></div>
             <div class="driver-name">
               <div class="first-name">{{driver.driverName}}</div>
             </div>
           </div>
           <div class="position-points">
             <div class="position">#{{driver.position}}</div>
-            <div class="driver-points">{{driver.points}}</div>
+            <div class="driver-points">{{driver.points}}pts</div>
           </div>
         </div>
       }
@@ -43,16 +42,15 @@
       @for (driver of driverStandings; track $index) {
         <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
           <div class="team-driver-name">
-            <div class="team-logo">LOGO</div>
-            <div class="hyphen">|</div>
+            <div class="team-logo"><img [src]="driver.logoPath"></div>
+            <div class="hyphen"></div>
             <div class="driver-name">
               <div class="first-name">{{driver.driverName}}</div>
             </div>
           </div>
-
           <div class="position-points">
-            <div class="position">position place</div>
-            <div class="driver-points">213pts</div>
+            <div class="position">#{{driver.position}}</div>
+            <div class="driver-points">{{driver.points}}pts</div>
           </div>
         </div>
         }

@@ -4,5 +4,6 @@ export interface Standing {
   team: string,
   points: number,
   teamColor: string,
-  driverNumber: number
+  driverNumber: number,
+  logoPath?: string
 }

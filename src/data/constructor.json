@@ -1,0 +1,62 @@
+[
+  {
+    "team": "McLaren",
+    "points": 559,
+    "teamColor": "#F58020",
+    "logoPath": "/assets/images/teams/mclaren.png"
+  },
+  {
+    "team": "Ferrari",
+    "points": 301,
+    "teamColor": "#F91536",
+    "logoPath": "/assets/images/teams/ferrari.png"
+  },
+  {
+    "team": "Mercedes",
+    "points": 236,
+    "teamColor": "#6CD3BF",
+    "logoPath": "/assets/images/teams/mercedes.png"
+  },
+  {
+    "team": "Red Bull Racing",
+    "points": 197,
+    "teamColor": "#3671C6",
+    "logoPath": "/assets/images/teams/redbull.png"
+  },
+  {
+    "team": "Williams",
+    "points": 70,
+    "teamColor": "#64C4FF",
+    "logoPath": "/assets/images/teams/williams.png"
+  },
+  {
+    "team": "Aston Martin",
+    "points": 52,
+    "teamColor": "#358C75",
+    "logoPath": "/assets/images/teams/aston.png"
+  },
+  {
+    "team": "RB",
+    "points": 42,
+    "teamColor": "#5E8FAA",
+    "logoPath": "/assets/images/teams/rb.png"
+  },
+  {
+    "team": "Haas",
+    "points": 35,
+    "teamColor": "#B6BABD",
+    "logoPath": "/assets/images/teams/haas.png"
+  },
+  {
+    "team": "Stake F1 Kick Sauber",
+    "points": 24,
+    "teamColor": "#C92D4B",
+    "logoPath": "/assets/images/teams/kick.png"
+  },
+  {
+    "team": "Alpine",
+    "points": 20,
+    "teamColor": "#2293D1",
+    "logoPath": "/assets/images/teams/alpine.png"
+  }
+]

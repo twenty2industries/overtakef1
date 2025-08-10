@@ -5,7 +5,8 @@
     "team": "Red Bull Racing",
     "points": 187,
     "teamColor": "#3671C6",
-    "driverNumber": 1
+    "driverNumber": 1,
+    "logoPath": "/assets/images/teams/redbull.png"
   },
   {
     "position": 5,
@@ -13,7 +14,8 @@
     "team": "Ferrari",
     "points": 151,
     "teamColor": "#F91536",
-    "driverNumber": 16
+    "driverNumber": 16,
+    "logoPath": "/assets/images/teams/ferrari.png"
   },
   {
     "position": 2,
@@ -21,7 +23,8 @@
     "team": "McLaren",
     "points": 275,
     "teamColor": "#F58020",
-    "driverNumber": 4
+    "driverNumber": 4,
+    "logoPath": "/assets/images/teams/mclaren.png"
   },
   {
     "position": 16,
@@ -29,7 +32,8 @@
     "team": "Williams",
     "points": 16,
     "teamColor": "#64C4FF",
-    "driverNumber": 55
+    "driverNumber": 55,
+    "logoPath": "/assets/images/teams/williams.png"
   },
   {
     "position": 1,
@@ -37,7 +41,8 @@
     "team": "McLaren",
     "points": 284,
     "teamColor": "#F58020",
-    "driverNumber": 81
+    "driverNumber": 81,
+    "logoPath": "/assets/images/teams/mclaren.png"
   },
   {
     "position": 6,
@@ -45,7 +50,8 @@
     "team": "Ferrari",
     "points": 150,
     "teamColor": "#F91536",
-    "driverNumber": 44
+    "driverNumber": 44,
+    "logoPath": "/assets/images/teams/ferrari.png"
   },
   {
     "position": 4,
@@ -53,7 +59,8 @@
     "team": "Mercedes",
     "points": 172,
     "teamColor": "#6CD3BF",
-    "driverNumber": 63
+    "driverNumber": 63,
+    "logoPath": "/assets/images/teams/mercedes.png"
   },
   {
     "position": 11,
@@ -61,7 +68,8 @@
     "team": "Aston Martin",
     "points": 26,
     "teamColor": "#358C75",
-    "driverNumber": 14
+    "driverNumber": 14,
+    "logoPath": "/assets/images/teams/aston.png"
   },
   {
     "position": 7,
@@ -69,7 +77,8 @@
     "team": "Mercedes",
     "points": 64,
     "teamColor": "#6CD3BF",
-    "driverNumber": 12
+    "driverNumber": 12,
+    "logoPath": "/assets/images/teams/mercedes.png"
   },
   {
     "position": 12,
@@ -77,7 +86,8 @@
     "team": "Aston Martin",
     "points": 26,
     "teamColor": "#358C75",
-    "driverNumber": 18
+    "driverNumber": 18,
+    "logoPath": "/assets/images/teams/aston.png"
   },
   {
     "position": 14,
@@ -85,7 +95,8 @@
     "team": "Alpine",
     "points": 20,
     "teamColor": "#2293D1",
-    "driverNumber": 10
+    "driverNumber": 10,
+    "logoPath": "/assets/images/teams/alpine.png"
   },
   {
     "position": 10,
@@ -93,7 +104,8 @@
     "team": "Haas",
     "points": 27,
     "teamColor": "#B6BABD",
-    "driverNumber": 31
+    "driverNumber": 31,
+    "logoPath": "/assets/images/teams/haas.png"
   },
   {
     "position": 18,
@@ -101,7 +113,8 @@
     "team": "Red Bull Racing",
     "points": 10,
     "teamColor": "#3671C6",
-    "driverNumber": 22
+    "driverNumber": 22,
+    "logoPath": "/assets/images/teams/redbull.png"
   },
   {
     "position": 13,
@@ -109,7 +122,8 @@
     "team": "RB",
     "points": 22,
     "teamColor": "#5E8FAA",
-    "driverNumber": 6
+    "driverNumber": 6,
+    "logoPath": "/assets/images/teams/rb.png"
   },
   {
     "position": 15,
@@ -117,7 +131,8 @@
     "team": "RB",
     "points": 20,
     "teamColor": "#5E8FAA",
-    "driverNumber": 30
+    "driverNumber": 30,
+    "logoPath": "/assets/images/teams/rb.png"
   },
   {
     "position": 17,
@@ -125,7 +140,8 @@
     "team": "Stake F1 Kick Sauber",
     "points": 14,
     "teamColor": "#C92D4B",
-    "driverNumber": 5
+    "driverNumber": 5,
+    "logoPath": "/assets/images/teams/kick.png"
   },
   {
     "position": 19,
@@ -133,7 +149,8 @@
     "team": "Haas",
     "points": 8,
     "teamColor": "#B6BABD",
-    "driverNumber": 20
+    "driverNumber": 20,
+    "logoPath": "/assets/images/teams/haas.png"
   },
   {
     "position": 9,
@@ -141,7 +158,8 @@
     "team": "Stake F1 Kick Sauber",
     "points": 10,
     "teamColor": "#C92D4B",
-    "driverNumber": 27
+    "driverNumber": 27,
+    "logoPath": "/assets/images/teams/kick.png"
   },
   {
     "position": 8,
@@ -149,7 +167,8 @@
     "team": "Williams",
     "points": 54,
     "teamColor": "#64C4FF",
-    "driverNumber": 23
+    "driverNumber": 23,
+    "logoPath": "/assets/images/teams/williams.png"
   },
   {
     "position": 20,
@@ -157,6 +176,7 @@
     "team": "Alpine",
     "points": 0,
     "teamColor": "#2293D1",
-    "driverNumber": 43
+    "driverNumber": 43,
+    "logoPath": "/assets/images/teams/alpine.png"
   }
 ]
