@@ -6,64 +6,59 @@
 
   <div class="standing-cards">
     @switch (openMenu) {
-    @case ('constructor-standing') {
-    <div class="constructor-cards">
-
-      <div class="team-constructor-name">
-        <div class="team-logo">LOGO</div>
-        <div class="hyphen">|</div>
-        <div class="constructor-name">
-
-          <div class="first-name">TeamName</div>
+      @case ('constructor-standing') {
+        @for (driver of driverStandings; track $index) {
+        <div class="constructor-cards">
+          <div class="team-constructor-name">
+            <div class="team-logo">LOGO</div>
+            <div class="hyphen">|</div>
+            <div class="first-name">{{driver.team}}</div>
+          </div>
+          <!-- 
+          <div class="position-points">
+            <div class="position">position place</div>
+            <div class="constructor-points">213pts</div>
+          </div> -->
         </div>
-      </div>
-
-      <div class="position-points">
-        <div class="position">position place</div>
-        <div class="constructor-points">213pts</div>
-      </div>
-
-    </div>
-
+    }
 
     } @case ('driver-standing') {
-    <div class="driver-cards">
+      @for (driver of driverStandings; track $index) {
+        <div class="driver-cards">
+          <div class="team-driver-name">
+            <div class="team-logo">LOGO</div>
+            <div class="hyphen">|</div>
+            <div class="driver-name">
+              <div class="first-name">{{driver.driverName}}</div>
+            </div>
+          </div>
 
-      <div class="team-driver-name">
-        <div class="team-logo">LOGO</div>
-        <div class="hyphen">|</div>
-        <div class="driver-name">
-          <div class="first-name">firstname</div>
-          <div class="last-name">lastname</div>
+          <div class="position-points">
+            <div class="position">#{{driver.position}}</div>
+            <div class="driver-points">{{driver.points}}</div>
+          </div>
+
         </div>
-      </div>
-
-      <div class="position-points">
-        <div class="position">position place</div>
-        <div class="driver-points">213pts</div>
-      </div>
-
-    </div> 
-  }
+      }
+    }
     @default {
-    <div class="driver-cards">
+      @for (driver of driverStandings; track $index) {
+        <div class="driver-cards">
+          <div class="team-driver-name">
+            <div class="team-logo">LOGO</div>
+            <div class="hyphen">|</div>
+            <div class="driver-name">
+              <div class="first-name">{{driver.driverName}}</div>
+            </div>
+          </div>
 
-      <div class="team-driver-name">
-        <div class="team-logo">LOGO</div>
-        <div class="hyphen">|</div>
-        <div class="driver-name">
-          <div class="first-name">firstname</div>
-          <div class="last-name">lastname</div>
+          <div class="position-points">
+            <div class="position">position place</div>
+            <div class="driver-points">213pts</div>
+          </div>
         </div>
-      </div>
-
-      <div class="position-points">
-        <div class="position">position place</div>
-        <div class="driver-points">213pts</div>
-      </div>
-
-    </div> 
-  }
+        }
+      }
     }
   </div>
 </section>

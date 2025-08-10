@@ -23,7 +23,7 @@ section {
     justify-content: center;
     flex-direction: column;
 
-    .driver-cards{
+    .driver-cards {
       padding: 10px;
       font-size: 1.6em;
       flex-direction: column;
@@ -35,9 +35,10 @@ section {
       width: 85%;
       height: 22vh;
 
-      .team-driver-name{
+      .team-driver-name {
         display: flex;
-        .team-logo{
+
+        .team-logo {
           display: flex;
           align-items: center;
         }
@@ -45,25 +46,26 @@ section {
     }
   }
 
-      .constructor-cards{
-              padding: 10px;
+  .constructor-cards {
+    padding: 10px;
 
-      font-size: 1.6em;
-      flex-direction: column;
+    font-size: 1.6em;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    border: solid 2px red;
+    border-radius: 10px;
+    width: 85%;
+    height: 22vh;
+
+    .team-constructor-name {
       display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-      border: solid 2px red;
-            border-radius: 10px;
 
-      width: 85%;
-      height: 22vh;
-      .team-constructor-name{
+      .team-logo {
         display: flex;
-        .team-logo{
-          display: flex;
-          align-items: center;
-        }
+        align-items: center;
       }
     }
   }
+}
