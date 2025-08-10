@@ -1,0 +1,162 @@
+[
+  {
+    "position": 3,
+    "driverName": "Max Verstappen",
+    "team": "Red Bull Racing",
+    "points": 187,
+    "teamColor": "#3671C6",
+    "driverNumber": 1
+  },
+  {
+    "position": 5,
+    "driverName": "Charles Leclerc",
+    "team": "Ferrari",
+    "points": 151,
+    "teamColor": "#F91536",
+    "driverNumber": 16
+  },
+  {
+    "position": 2,
+    "driverName": "Lando Norris",
+    "team": "McLaren",
+    "points": 275,
+    "teamColor": "#F58020",
+    "driverNumber": 4
+  },
+  {
+    "position": 16,
+    "driverName": "Carlos Sainz",
+    "team": "Williams",
+    "points": 16,
+    "teamColor": "#64C4FF",
+    "driverNumber": 55
+  },
+  {
+    "position": 1,
+    "driverName": "Oscar Piastri",
+    "team": "McLaren",
+    "points": 284,
+    "teamColor": "#F58020",
+    "driverNumber": 81
+  },
+  {
+    "position": 6,
+    "driverName": "Lewis Hamilton",
+    "team": "Ferrari",
+    "points": 150,
+    "teamColor": "#F91536",
+    "driverNumber": 44
+  },
+  {
+    "position": 4,
+    "driverName": "George Russell",
+    "team": "Mercedes",
+    "points": 172,
+    "teamColor": "#6CD3BF",
+    "driverNumber": 63
+  },
+  {
+    "position": 11,
+    "driverName": "Fernando Alonso",
+    "team": "Aston Martin",
+    "points": 26,
+    "teamColor": "#358C75",
+    "driverNumber": 14
+  },
+  {
+    "position": 7,
+    "driverName": "Kimi Antonelli",
+    "team": "Mercedes",
+    "points": 64,
+    "teamColor": "#6CD3BF",
+    "driverNumber": 12
+  },
+  {
+    "position": 12,
+    "driverName": "Lance Stroll",
+    "team": "Aston Martin",
+    "points": 26,
+    "teamColor": "#358C75",
+    "driverNumber": 18
+  },
+  {
+    "position": 14,
+    "driverName": "Pierre Gasly",
+    "team": "Alpine",
+    "points": 20,
+    "teamColor": "#2293D1",
+    "driverNumber": 10
+  },
+  {
+    "position": 10,
+    "driverName": "Esteban Ocon",
+    "team": "Haas",
+    "points": 27,
+    "teamColor": "#B6BABD",
+    "driverNumber": 31
+  },
+  {
+    "position": 18,
+    "driverName": "Yuki Tsunoda",
+    "team": "Red Bull Racing",
+    "points": 10,
+    "teamColor": "#3671C6",
+    "driverNumber": 22
+  },
+  {
+    "position": 13,
+    "driverName": "Isack Hadjar",
+    "team": "RB",
+    "points": 22,
+    "teamColor": "#5E8FAA",
+    "driverNumber": 6
+  },
+  {
+    "position": 15,
+    "driverName": "Liam Lawson",
+    "team": "RB",
+    "points": 20,
+    "teamColor": "#5E8FAA",
+    "driverNumber": 30
+  },
+  {
+    "position": 17,
+    "driverName": "Gabriel Bortoleto",
+    "team": "Stake F1 Kick Sauber",
+    "points": 14,
+    "teamColor": "#C92D4B",
+    "driverNumber": 5
+  },
+  {
+    "position": 19,
+    "driverName": "Oliver Bearman",
+    "team": "Haas",
+    "points": 8,
+    "teamColor": "#B6BABD",
+    "driverNumber": 20
+  },
+  {
+    "position": 9,
+    "driverName": "Nico Hulkenberg",
+    "team": "Stake F1 Kick Sauber",
+    "points": 10,
+    "teamColor": "#C92D4B",
+    "driverNumber": 27
+  },
+  {
+    "position": 8,
+    "driverName": "Alex Albon",
+    "team": "Williams",
+    "points": 54,
+    "teamColor": "#64C4FF",
+    "driverNumber": 23
+  },
+  {
+    "position": 20,
+    "driverName": "Logan Sargeant",
+    "team": "Alpine",
+    "points": 0,
+    "teamColor": "#2293D1",
+    "driverNumber": 43
+  }
+]

@@ -1,0 +1,69 @@
+section {
+  flex-direction: column;
+  display: flex;
+  font-family: 'Inter';
+  font-size: 10px;
+
+  .select-menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      width: 50%;
+      height: 10vh;
+      font-size: 2em;
+    }
+  }
+
+  .standing-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .driver-cards{
+      padding: 10px;
+      font-size: 1.6em;
+      flex-direction: column;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      border: solid 2px red;
+      border-radius: 10px;
+      width: 85%;
+      height: 22vh;
+
+      .team-driver-name{
+        display: flex;
+        .team-logo{
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+      .constructor-cards{
+              padding: 10px;
+
+      font-size: 1.6em;
+      flex-direction: column;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      border: solid 2px red;
+            border-radius: 10px;
+
+      width: 85%;
+      height: 22vh;
+      .team-constructor-name{
+        display: flex;
+        .team-logo{
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
