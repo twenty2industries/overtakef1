@@ -36,24 +36,30 @@ export class DriverStandingsComponent {
   openMenu: string = 'drivers-standing';
 
   drivers$!: Observable<Standing[]>;
+
   constructors$!: Observable<Constructor[]>;
+  
   loaded!: Signal<boolean>;
+
+  driverActive:boolean = true;
+    constructorActive:boolean = false;
+
 
   constructor(private standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
-/*this.loaded = toSignal(
+this.loaded = toSignal(
   combineLatest([this.drivers$, this.constructors$]).pipe(
     map(() => true),
     delay(1500) // Ladezeit simulieren
   ),
   { initialValue: false }
-);*/
+);
 
-    this.loaded = toSignal(
+/*     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
-    ); 
+    );  */
   }
 
   

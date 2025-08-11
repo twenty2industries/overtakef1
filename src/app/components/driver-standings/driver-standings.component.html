@@ -1,9 +1,11 @@
 <section>
 @defer (when loaded()) {
   <div class="select-menu">
-    <button (click)="openMenu = 'driver-standing'"
+    <button (click)="openMenu= 'driver-standing'"   [class.button-active]="driverActive"
+  (click)="driverActive = true;constructorActive = false "
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-1.jpg)'">DRIVERS</button>
-    <button (click)="openMenu = 'constructor-standing'"
+    <button (click)="openMenu = 'constructor-standing'" [class.button-active]="constructorActive"
+  (click)="constructorActive = true; driverActive = false"
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
   </div>
 
