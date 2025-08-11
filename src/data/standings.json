@@ -6,7 +6,8 @@
     "points": 187,
     "teamColor": "#3671C6",
     "driverNumber": 1,
-    "logoPath": "/assets/images/teams/redbull.png"
+    "logoPath": "/assets/images/teams/redbull.png",
+    "driverImagePath": "/assets/images/driver/max-verstappen.avif"
   },
   {
     "position": 5,
@@ -15,7 +16,8 @@
     "points": 151,
     "teamColor": "#F91536",
     "driverNumber": 16,
-    "logoPath": "/assets/images/teams/ferrari.png"
+    "logoPath": "/assets/images/teams/ferrari.png",
+    "driverImagePath": "/assets/images/driver/charles-leclerc.avif"
   },
   {
     "position": 2,
@@ -24,7 +26,8 @@
     "points": 275,
     "teamColor": "#F58020",
     "driverNumber": 4,
-    "logoPath": "/assets/images/teams/mclaren.png"
+    "logoPath": "/assets/images/teams/mclaren.png",
+    "driverImagePath": "/assets/images/driver/lando-norris.avif"
   },
   {
     "position": 16,
@@ -33,7 +36,8 @@
     "points": 16,
     "teamColor": "#64C4FF",
     "driverNumber": 55,
-    "logoPath": "/assets/images/teams/williams.png"
+    "logoPath": "/assets/images/teams/williams.png",
+    "driverImagePath": "/assets/images/driver/carlos-sainz.avif"
   },
   {
     "position": 1,
@@ -42,7 +46,8 @@
     "points": 284,
     "teamColor": "#F58020",
     "driverNumber": 81,
-    "logoPath": "/assets/images/teams/mclaren.png"
+    "logoPath": "/assets/images/teams/mclaren.png",
+    "driverImagePath": "/assets/images/driver/oscar-piastri.avif"
   },
   {
     "position": 6,
@@ -51,7 +56,8 @@
     "points": 150,
     "teamColor": "#F91536",
     "driverNumber": 44,
-    "logoPath": "/assets/images/teams/ferrari.png"
+    "logoPath": "/assets/images/teams/ferrari.png",
+    "driverImagePath": "/assets/images/driver/lewis-hamilton.avif"
   },
   {
     "position": 4,
@@ -60,7 +66,8 @@
     "points": 172,
     "teamColor": "#6CD3BF",
     "driverNumber": 63,
-    "logoPath": "/assets/images/teams/mercedes.png"
+    "logoPath": "/assets/images/teams/mercedes.png",
+    "driverImagePath": "/assets/images/driver/george-russell.avif"
   },
   {
     "position": 11,
@@ -69,7 +76,8 @@
     "points": 26,
     "teamColor": "#358C75",
     "driverNumber": 14,
-    "logoPath": "/assets/images/teams/aston.png"
+    "logoPath": "/assets/images/teams/aston.png",
+    "driverImagePath": "/assets/images/driver/fernando-alonso.avif"
   },
   {
     "position": 7,
@@ -78,7 +86,8 @@
     "points": 64,
     "teamColor": "#6CD3BF",
     "driverNumber": 12,
-    "logoPath": "/assets/images/teams/mercedes.png"
+    "logoPath": "/assets/images/teams/mercedes.png",
+    "driverImagePath": "/assets/images/driver/kimi-antonelli.avif"
   },
   {
     "position": 12,
@@ -87,7 +96,8 @@
     "points": 26,
     "teamColor": "#358C75",
     "driverNumber": 18,
-    "logoPath": "/assets/images/teams/aston.png"
+    "logoPath": "/assets/images/teams/aston.png",
+    "driverImagePath": "/assets/images/driver/lance-stroll.avif"
   },
   {
     "position": 14,
@@ -96,7 +106,8 @@
     "points": 20,
     "teamColor": "#2293D1",
     "driverNumber": 10,
-    "logoPath": "/assets/images/teams/alpine.png"
+    "logoPath": "/assets/images/teams/alpine.png",
+    "driverImagePath": "/assets/images/driver/pierre-gasly.avif"
   },
   {
     "position": 10,
@@ -105,7 +116,8 @@
     "points": 27,
     "teamColor": "#B6BABD",
     "driverNumber": 31,
-    "logoPath": "/assets/images/teams/haas.png"
+    "logoPath": "/assets/images/teams/haas.png",
+    "driverImagePath": "/assets/images/driver/esteban-ocon.avif"
   },
   {
     "position": 18,
@@ -114,7 +126,8 @@
     "points": 10,
     "teamColor": "#3671C6",
     "driverNumber": 22,
-    "logoPath": "/assets/images/teams/redbull.png"
+    "logoPath": "/assets/images/teams/redbull.png",
+    "driverImagePath": "/assets/images/driver/yuki-tsunoda.avif"
   },
   {
     "position": 13,
@@ -123,7 +136,8 @@
     "points": 22,
     "teamColor": "#5E8FAA",
     "driverNumber": 6,
-    "logoPath": "/assets/images/teams/rb.png"
+    "logoPath": "/assets/images/teams/rb.png",
+    "driverImagePath": "/assets/images/driver/isack-hadjar.avif"
   },
   {
     "position": 15,
@@ -132,7 +146,8 @@
     "points": 20,
     "teamColor": "#5E8FAA",
     "driverNumber": 30,
-    "logoPath": "/assets/images/teams/rb.png"
+    "logoPath": "/assets/images/teams/rb.png",
+    "driverImagePath": "/assets/images/driver/liam-lawson.avif"
   },
   {
     "position": 17,
@@ -141,7 +156,8 @@
     "points": 14,
     "teamColor": "#C92D4B",
     "driverNumber": 5,
-    "logoPath": "/assets/images/teams/kick.png"
+    "logoPath": "/assets/images/teams/kick.png",
+    "driverImagePath": "/assets/images/driver/gabriel-bortoleto.avif"
   },
   {
     "position": 19,
@@ -150,7 +166,8 @@
     "points": 8,
     "teamColor": "#B6BABD",
     "driverNumber": 20,
-    "logoPath": "/assets/images/teams/haas.png"
+    "logoPath": "/assets/images/teams/haas.png",
+    "driverImagePath": "/assets/images/driver/oliver-bearman.avif"
   },
   {
     "position": 9,
@@ -159,7 +176,8 @@
     "points": 10,
     "teamColor": "#C92D4B",
     "driverNumber": 27,
-    "logoPath": "/assets/images/teams/kick.png"
+    "logoPath": "/assets/images/teams/kick.png",
+    "driverImagePath": "/assets/images/driver/nico-hulkenberg.avif"
   },
   {
     "position": 8,
@@ -168,15 +186,17 @@
     "points": 54,
     "teamColor": "#64C4FF",
     "driverNumber": 23,
-    "logoPath": "/assets/images/teams/williams.png"
+    "logoPath": "/assets/images/teams/williams.png",
+    "driverImagePath": "/assets/images/driver/alex-albon.avif"
   },
   {
     "position": 20,
-    "driverName": "Logan Sargeant",
+    "driverName": "Franco Colapinto",
     "team": "Alpine",
     "points": 0,
     "teamColor": "#2293D1",
     "driverNumber": 43,
-    "logoPath": "/assets/images/teams/alpine.png"
+    "logoPath": "/assets/images/teams/alpine.png",
+    "driverImagePath": "/assets/images/driver/franco-colapinto.avif"
   }
 ]

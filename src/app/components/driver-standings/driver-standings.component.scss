@@ -40,15 +40,12 @@ section {
       width: 85%;
       height: 22vh;
 
-
       .team-driver-name {
         align-items: center;
         display: flex;
         color: white;
         font-size: 2.4em;
-
       }
-
     }
   }
 
@@ -82,7 +79,6 @@ section {
     background-color: black;
   }
 
-
   .team-logo {
     display: flex;
     align-items: center;
@@ -94,15 +90,34 @@ section {
     }
   }
 
-
   .position-points {
     display: flex;
     color: white;
-    flex-direction: column;
+    flex-direction: row;
     font-size: 2em;
+    justify-content: space-between;
   }
 
-  .fade-wrapper{
+  .fade-wrapper {
     width: 95%;
+  }
+
+  .driver-image-container {
+    display: flex;
+
+    .driver {
+    background-position: center;
+    background-size: contain;
+    width: 128px;
+    height: 98px;
+    object-fit: cover;
+    object-position: top;
+    }
+  }
+
+  .points-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
   }
 }
