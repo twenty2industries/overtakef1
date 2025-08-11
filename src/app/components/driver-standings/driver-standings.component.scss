@@ -31,39 +31,41 @@ section {
     flex-direction: column;
 
     .driver-cards {
-      padding: 10px;
       flex-direction: column;
       display: flex;
       justify-content: space-between;
       margin: 1rem 0rem;
       border-radius: 10px;
       width: 85%;
-      height: 22vh;
+      height: 24vh;
 
       .team-driver-name {
+        padding-left: 10px;
+        margin-top: 10px;
         align-items: center;
         display: flex;
         color: white;
-        font-size: 2.4em;
+        font-size: 2.0em;
       }
     }
   }
 
   .constructor-cards {
-    padding: 10px;
-    flex-direction: column;
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem 0rem;
-    border-radius: 10px;
-    width: 85%;
-    height: 22vh;
+      flex-direction: column;
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0rem;
+      border-radius: 10px;
+      width: 85%;
+      height: 24vh;
 
     .team-constructor-name {
-      align-items: center;
-      display: flex;
-      color: white;
-      font-size: 2.4em;
+        padding-left: 10px;
+        margin-top: 10px;
+        align-items: center;
+        display: flex;
+        color: white;
+        font-size: 2.0em;
 
       .team-logo {
         display: flex;
@@ -74,7 +76,7 @@ section {
 
   .hyphen {
     margin: 0% 5%;
-    height: 100%;
+    height: 66%;
     width: 2px;
     background-color: black;
   }
@@ -87,6 +89,7 @@ section {
       width: 80px;
       height: 40px;
       object-fit: contain;
+      object-position: left;
     }
   }
 
@@ -96,6 +99,16 @@ section {
     flex-direction: row;
     font-size: 2em;
     justify-content: space-between;
+    height: 48%;
+  }
+
+  .constructor-position-points {
+    display: flex;
+    color: white;
+    flex-direction: row;
+    font-size: 2em;
+    justify-content: space-between;
+    height: 48%;
   }
 
   .fade-wrapper {
@@ -104,14 +117,16 @@ section {
 
   .driver-image-container {
     display: flex;
+    justify-content: end;
+    align-items: end;
 
     .driver {
-    background-position: center;
-    background-size: contain;
-    width: 128px;
-    height: 98px;
-    object-fit: cover;
-    object-position: top;
+      height: 155%;
+      background-position: center;
+      background-size: contain;
+      width: 169px;
+      object-fit: cover;
+      object-position: top;
     }
   }
 
@@ -119,5 +134,26 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: end;
+    padding-bottom: 10px;
+    padding-left: 10px;
   }
+}
+
+.f1-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+  font-family: 'Inter', sans-serif;
+
+  .spin-logo {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+
 }

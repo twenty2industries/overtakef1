@@ -1,4 +1,5 @@
 <section>
+@defer (when loaded()) {
   <div class="select-menu">
     <button (click)="openMenu = 'driver-standing'"
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-1.jpg)'">DRIVERS</button>
@@ -10,7 +11,7 @@
     @switch (openMenu) {
     @case ('constructor-standing') {
     <div class="fade-wrapper" @fadeSlide>
-      @for (team of constructosStandings; track $index) {
+      @for (team of (constructors$ | async); track $index) {
       <div class="constructor-cards"
         [style.background]=" 'linear-gradient(to right,' + team.teamColor + ', transparent)'">
         <div class="team-constructor-name">
@@ -18,9 +19,16 @@
           <div class="hyphen"></div>
           <div class="first-name">{{team.team}}</div>
         </div>
-        <div class="position-points">
-          <div class="position">#{{$index + 1}}</div>
-          <div class="constructor-points">{{team.points}} pts</div>
+        <div class="car-container">
+          <img src="" alt="">
+        </div>
+        <div class="constructor-position-points">
+          <div class="points-wrapper">
+
+            <div class="position">#{{$index + 1}}</div>
+            <div class="constructor-points">{{team.points}} pts</div>
+          </div>
+
         </div>
       </div>
       }
@@ -28,7 +36,7 @@
 
     } @case ('driver-standing') {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of driverStandings; track $index) {
+      @for (driver of (drivers$ | async); track $index) {
       <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
         <div class="team-driver-name">
           <div class="team-logo"><img [src]="driver.logoPath"></div>
@@ -52,7 +60,7 @@
     }
     @default {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of driverStandings; track $index) {
+      @for (driver of (drivers$ | async); track $index) {
       <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
         <div class="team-driver-name">
           <div class="team-logo"><img [src]="driver.logoPath"></div>
@@ -76,4 +84,13 @@
     }
     }
   </div>
+
+}
+
+@placeholder {
+  <div class="f1-loading">
+    <img src="/assets/images/spinners/spinner1.gif" alt="F1 Logo" class="spin-logo">
+  </div>
+}
+
 </section>
