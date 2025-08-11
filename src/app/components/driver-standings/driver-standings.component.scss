@@ -154,6 +154,16 @@ section {
     width: 100%;
     height: auto;
   }
+}
 
+.car-container{
+  height: auto;
 
+  img{
+    width: 50dvw;
+    height: 52px;
+    padding-left: 20px;
+    object-fit: contain;
+    object-position: right;
+  }
 }

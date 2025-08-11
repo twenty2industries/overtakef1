@@ -42,18 +42,18 @@ export class DriverStandingsComponent {
   constructor(private standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
-this.loaded = toSignal(
+/*this.loaded = toSignal(
   combineLatest([this.drivers$, this.constructors$]).pipe(
     map(() => true),
     delay(1500) // Ladezeit simulieren
   ),
   { initialValue: false }
-);
-/* 
+);*/
+
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
-    ); */
+    ); 
   }
 
   

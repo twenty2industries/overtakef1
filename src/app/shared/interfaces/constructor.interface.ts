@@ -3,4 +3,5 @@ export interface Constructor {
   points: number;
   teamColor: string;
   logoPath?: string;
+  carImagePath?: string
 }

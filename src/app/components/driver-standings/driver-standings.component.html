@@ -19,16 +19,16 @@
           <div class="hyphen"></div>
           <div class="first-name">{{team.team}}</div>
         </div>
-        <div class="car-container">
-          <img src="" alt="">
-        </div>
+
         <div class="constructor-position-points">
           <div class="points-wrapper">
 
             <div class="position">#{{$index + 1}}</div>
             <div class="constructor-points">{{team.points}} pts</div>
           </div>
-
+        <div class="car-container">
+          <img [src]="team.carImagePath" alt="">
+        </div>
         </div>
       </div>
       }
