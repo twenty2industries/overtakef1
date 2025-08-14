@@ -116,7 +116,7 @@
     "points": 27,
     "teamColor": "#B6BABD",
     "driverNumber": 31,
-    "logoPath": "/assets/images/teams/haas.png",
+    "logoPath": "/assets/images/teams/haasSmall.png",
     "driverImagePath": "/assets/images/driver/esteban-ocon.avif"
   },
   {
@@ -166,7 +166,7 @@
     "points": 8,
     "teamColor": "#B6BABD",
     "driverNumber": 20,
-    "logoPath": "/assets/images/teams/haas.png",
+    "logoPath": "/assets/images/teams/haasSmall.png",
     "driverImagePath": "/assets/images/driver/oliver-bearman.avif"
   },
   {
