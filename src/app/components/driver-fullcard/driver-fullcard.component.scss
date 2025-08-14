@@ -1,0 +1,33 @@
+section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: white;
+  border-radius: 10px 10px 90px 10px;
+  
+  .driver-team{
+    display: flex;
+    justify-content: center;
+
+    img{
+      margin-top: 10px;
+      width: 80%;
+      height: 8vh;
+      object-fit: contain;
+    }
+  }
+
+    .driver-image{
+    display: flex;
+    justify-content: center;
+
+    img{
+      position: absolute;
+      right: 2em;
+      height: 70vh;
+      width: 34%;
+      object-fit: contain;
+    }
+  }
+
+}

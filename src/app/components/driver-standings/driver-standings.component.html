@@ -1,13 +1,15 @@
 <section>
-@defer (when loaded()) {
+  @defer (when loaded()) {
   <div class="select-menu">
-    <button (click)="openMenu= 'driver-standing'"   [class.button-active]="driverActive"
-  (click)="driverActive = true;constructorActive = false "
+    <button (click)="openMenu= 'driver-standing'" [class.button-active]="driverActive"
+      (click)="driverActive = true;constructorActive = false "
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-1.jpg)'">DRIVERS</button>
     <button (click)="openMenu = 'constructor-standing'" [class.button-active]="constructorActive"
-  (click)="constructorActive = true; driverActive = false"
+      (click)="constructorActive = true; driverActive = false"
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
   </div>
+
+
 
   <div class="standing-cards">
     @switch (openMenu) {
@@ -28,18 +30,20 @@
             <div class="position">#{{$index + 1}}</div>
             <div class="constructor-points">{{team.points}} pts</div>
           </div>
-        <div class="car-container">
-          <img [src]="team.carImagePath" alt="">
-        </div>
+          <div class="car-container">
+            <img [src]="team.carImagePath" alt="">
+          </div>
         </div>
       </div>
+
       }
     </div>
 
     } @case ('driver-standing') {
     <div class="fade-wrapper" @fadeSlide>
       @for (driver of (drivers$ | async); track $index) {
-      <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+      <div (click)="openDriverFullCard(driver)" class="driver-cards"
+        [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
         <div class="team-driver-name">
           <div class="team-logo"><img [src]="driver.logoPath"></div>
           <div class="hyphen"></div>
@@ -63,7 +67,8 @@
     @default {
     <div class="fade-wrapper" @fadeSlide>
       @for (driver of (drivers$ | async); track $index) {
-      <div class="driver-cards" [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+      <div (click)="openDriverFullCard(driver)" class="driver-cards"
+        [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
         <div class="team-driver-name">
           <div class="team-logo"><img [src]="driver.logoPath"></div>
           <div class="hyphen"></div>
@@ -86,13 +91,18 @@
     }
     }
   </div>
+  }
 
-}
-
-@placeholder {
+  @placeholder {
   <div class="f1-loading">
     <img src="/assets/images/spinners/spinner1.gif" alt="F1 Logo" class="spin-logo">
   </div>
-}
+  }
+
+  @if (selectedUser) {
+<div class="overlay" (click)="selectedUser = null"></div>
+<app-driver-fullcard [driver]="selectedUser"></app-driver-fullcard>
+  }
+
 
 </section>

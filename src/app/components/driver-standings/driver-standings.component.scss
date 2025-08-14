@@ -33,12 +33,12 @@ section {
     flex-direction: column;
 
     .driver-cards {
+      cursor: pointer;
       flex-direction: column;
       display: flex;
       justify-content: space-between;
       margin: 1rem 0rem;
       border-radius: 10px;
-
       height: 24vh;
 
       .team-driver-name {
@@ -180,8 +180,28 @@ section {
   text-shadow: 
     0px 0 0px rgba(255, 255, 255, 0.9),
     0px 0 0px rgba(255, 255, 255, 0.7),
-    6px 0 6px rgba(255, 255, 255, 0.5),
-    8px 0 8px rgba(255, 255, 255, 0.3),
-    10px 0 10px rgba(255, 255, 255, 0.15);
+    4px 0 6px rgba(255, 255, 255, 0.5),
+    5px 0 8px rgba(255, 255, 255, 0.3),
+    6px 0 10px rgba(255, 255, 255, 0.15);
 }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.912);
+  z-index: 9998;
+}
+
+app-driver-fullcard {
+  background-color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 99%;
+  height: 80vh;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
 

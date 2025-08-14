@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Standing } from '../../shared/interfaces/driver.interface';
 import { Constructor } from '../../shared/interfaces/constructor.interface';
@@ -8,10 +8,11 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
 import { combineLatest, map, Observable, startWith, delay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.component';
 
 @Component({
   selector: 'app-driver-standings',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, DriverFullcardComponent],
   templateUrl: './driver-standings.component.html',
   styleUrl: './driver-standings.component.scss',
   animations: [
@@ -33,34 +34,47 @@ import { toSignal } from '@angular/core/rxjs-interop';
   ],
 })
 export class DriverStandingsComponent {
+  @Input() driver!: Standing;
+
   openMenu: string = 'drivers-standing';
 
   drivers$!: Observable<Standing[]>;
 
   constructors$!: Observable<Constructor[]>;
-  
+
   loaded!: Signal<boolean>;
 
-  driverActive:boolean = true;
-    constructorActive:boolean = false;
+  selectedUser: Standing | null = null;
 
+  driverActive: boolean = true;
+  constructorActive: boolean = false;
 
-  constructor(private standingsDataService: StandingsDataService) {
+  constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
-this.loaded = toSignal(
-  combineLatest([this.drivers$, this.constructors$]).pipe(
-    map(() => true),
-    delay(1500) // Ladezeit simulieren
-  ),
-  { initialValue: false }
-);
-
 /*     this.loaded = toSignal(
+      combineLatest([this.drivers$, this.constructors$]).pipe(
+        map(() => true),
+        delay(1500) // Ladezeit simulieren
+      ),
+      { initialValue: false }
+    ); */
+
+      this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
-    );  */
+    );  
   }
 
-  
+openDriverFullCard(driver: Standing) {
+  this.selectedUser = driver;
+  document.body.classList.add('modal-open');
+}
+
+closeDriverFullCard() {
+  this.selectedUser = null;
+  document.body.classList.remove('modal-open');
+}
+
+
 }

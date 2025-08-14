@@ -1,0 +1,12 @@
+<section @fadeSlide [style.background]=" 'linear-gradient(to left,' + driver.teamColor + ', transparent)'">
+
+  @if(driver){
+    <div class="driver-team">
+      <img [src]="driver.logoPath" alt="">
+    </div>
+
+    <div class="driver-image">
+      <img [src]="driver.driverImagePath" alt="">
+    </div>
+  }
+</section>
