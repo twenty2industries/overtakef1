@@ -41,23 +41,22 @@
 
     } @case ('driver-standing') {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of (drivers$ | async); track $index) {
-      <div (click)="openDriverFullCard(driver)" class="driver-cards"
-        [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+      @for (driver of (driver$ | async); track $index) {
+      <div (click)="openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
         <div class="team-driver-name">
-          <div class="team-logo"><img [src]="driver.logoPath"></div>
+          <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
           <div class="hyphen"></div>
           <div class="driver-name">
-            <div class="first-name">{{driver.driverName}}</div>
+            <div class="first-name">{{driver.base.driverName}}</div>
           </div>
         </div>
         <div class="position-points">
           <div class="points-wrapper">
             <div class="position">#{{$index + 1}}</div>
-            <div class="driver-points">{{driver.points}} pts</div>
+            <div class="driver-points">{{driver.season.points}} pts</div>
           </div>
           <div class="driver-image-container">
-            <img class="driver" [src]="driver.driverImagePath">
+            <img class="driver" [src]="driver.base.assets.image">
           </div>
         </div>
       </div>
@@ -66,23 +65,22 @@
     }
     @default {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of (drivers$ | async); track $index) {
-      <div (click)="openDriverFullCard(driver)" class="driver-cards"
-        [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+      @for (driver of (driver$ | async); track $index) {
+      <div (click)="openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
         <div class="team-driver-name">
-          <div class="team-logo"><img [src]="driver.logoPath"></div>
+          <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
           <div class="hyphen"></div>
           <div class="driver-name">
-            <div class="first-name">{{driver.driverName}}</div>
+            <div class="first-name">{{driver.base.driverName}}</div>
           </div>
         </div>
         <div class="position-points">
           <div class="points-wrapper">
             <div class="position">#{{$index + 1}}</div>
-            <div class="driver-points">{{driver.points}} pts</div>
+            <div class="driver-points">{{driver.season.points}} pts</div>
           </div>
           <div class="driver-image-container">
-            <img class="driver" [src]="driver.driverImagePath">
+            <img class="driver" [src]="driver.base.assets.image">
           </div>
         </div>
       </div>

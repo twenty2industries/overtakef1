@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import standings from '../../../data/standings.json';
-import { Standing } from '../../shared/interfaces/driver.interface';
+import driver from '../../../data/driver.json';
+import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import constructor from '../../../data/constructor.json';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -31,5 +31,5 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class DriverFullcardComponent {
 
-  @Input() driver!:Standing;
+  @Input() driver!:Driver;
 }

@@ -1,13 +1,12 @@
-<section @fadeSlide [style.background]=" 'linear-gradient(to right,' + driver.teamColor + ', transparent)'">
+<section @fadeSlide [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
   @if(driver){
-    <div class="driver-team">
-      <img [src]="driver.logoPath" alt="">
+    <div class="driver-team" >
+      <img [src]="driver.base.assets.teamLogo" alt="">
     </div>
-
     <div class="driver-image">
-      <img [src]="driver.driverImagePath" alt="">
+      <img [src]="driver.base.assets.image"  alt="">
       <div class="driver-input">
-        <h1>{{driver.driverName}}</h1>
+        <h1>{{driver.base.driverName}}</h1>
       </div>
     </div>
   }

@@ -1,6 +1,6 @@
 import { Component, Input, Signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Standing } from '../../shared/interfaces/driver.interface';
+import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Constructor } from '../../shared/interfaces/constructor.interface';
 import standings from '../../../data/standings.json';
 import constructor from '../../../data/constructor.json';
@@ -33,18 +33,21 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
     ]),
   ],
 })
+
 export class DriverStandingsComponent {
-  @Input() driver!: Standing;
+  @Input() driver!: Driver;
 
   openMenu: string = 'drivers-standing';
 
   drivers$!: Observable<Standing[]>;
 
+  driver$!: Observable<Driver[]>;
+
   constructors$!: Observable<Constructor[]>;
 
   loaded!: Signal<boolean>;
 
-  selectedUser: Standing | null = null;
+  selectedUser: Driver | null = null;
 
   driverActive: boolean = true;
   constructorActive: boolean = false;
@@ -52,6 +55,8 @@ export class DriverStandingsComponent {
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
+    this.driver$ = this.standingsDataService.getDriver$();    
+
 /*     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(
         map(() => true),
@@ -66,7 +71,7 @@ export class DriverStandingsComponent {
     );  
   }
 
-openDriverFullCard(driver: Standing) {
+openDriverFullCard(driver: Driver) {
   this.selectedUser = driver;
   document.body.classList.add('modal-open');
 }

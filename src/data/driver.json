@@ -1,0 +1,682 @@
+[
+  {
+    "base": {
+      "driverId": "verstappen_max",
+      "driverNumber": 1,
+      "driverName": "Max Verstappen",
+      "teamId": "red_bull",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/max-verstappen.avif",
+        "teamLogo": "/assets/images/teams/redbull.png",
+        "teamColor": "#3671C6"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 210, "wins": 65, "poles": 45, "laps": 12500, "dnf": 20, "top10s": 180, "podiums": 105 },
+      "sprint": { "races": 18, "points": 150, "wins": 7, "podiums": 12, "poles": 8, "top10s": 18 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Red Bull Racing",
+      "position": 3,
+      "points": 187,
+      "wins": 0,
+      "podiums": 6,
+      "poles": 2,
+      "fastestLaps": 2,
+      "sprint": { "points": 24, "wins": 1, "podiums": 2 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "leclerc_charles",
+      "driverNumber": 16,
+      "driverName": "Charles Leclerc",
+      "teamId": "ferrari",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/charles-leclerc.avif",
+        "teamLogo": "/assets/images/teams/ferrari.png",
+        "teamColor": "#F91536"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 165, "wins": 8, "poles": 25, "laps": 9800, "dnf": 18, "top10s": 120, "podiums": 40 },
+      "sprint": { "races": 16, "points": 110, "wins": 4, "podiums": 8, "poles": 5, "top10s": 15 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Ferrari",
+      "position": 5,
+      "points": 151,
+      "wins": 0,
+      "podiums": 4,
+      "poles": 2,
+      "fastestLaps": 1,
+      "sprint": { "points": 16, "wins": 0, "podiums": 1 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "norris_lando",
+      "driverNumber": 4,
+      "driverName": "Lando Norris",
+      "teamId": "mclaren",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/lando-norris.avif",
+        "teamLogo": "/assets/images/teams/mclaren.png",
+        "teamColor": "#F58020"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 150, "wins": 8, "poles": 6, "laps": 8500, "dnf": 12, "top10s": 125, "podiums": 35 },
+      "sprint": { "races": 16, "points": 120, "wins": 3, "podiums": 9, "poles": 4, "top10s": 15 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "McLaren",
+      "position": 2,
+      "points": 275,
+      "wins": 3,
+      "podiums": 10,
+      "poles": 3,
+      "fastestLaps": 4,
+      "sprint": { "points": 28, "wins": 1, "podiums": 3 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "sainz_carlos",
+      "driverNumber": 55,
+      "driverName": "Carlos Sainz",
+      "teamId": "williams",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/carlos-sainz.avif",
+        "teamLogo": "/assets/images/teams/williams.png",
+        "teamColor": "#64C4FF"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 190, "wins": 5, "poles": 6, "laps": 11200, "dnf": 22, "top10s": 150, "podiums": 20 },
+      "sprint": { "races": 16, "points": 90, "wins": 2, "podiums": 6, "poles": 3, "top10s": 14 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Williams",
+      "position": 16,
+      "points": 16,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 2, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "piastri_oscar",
+      "driverNumber": 81,
+      "driverName": "Oscar Piastri",
+      "teamId": "mclaren",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/oscar-piastri.avif",
+        "teamLogo": "/assets/images/teams/mclaren.png",
+        "teamColor": "#F58020"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 60, "wins": 7, "poles": 5, "laps": 3600, "dnf": 5, "top10s": 45, "podiums": 15 },
+      "sprint": { "races": 12, "points": 90, "wins": 3, "podiums": 6, "poles": 3, "top10s": 11 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "McLaren",
+      "position": 1,
+      "points": 284,
+      "wins": 4,
+      "podiums": 11,
+      "poles": 4,
+      "fastestLaps": 3,
+      "sprint": { "points": 32, "wins": 2, "podiums": 3 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "hamilton_lewis",
+      "driverNumber": 44,
+      "driverName": "Lewis Hamilton",
+      "teamId": "ferrari",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/lewis-hamilton.avif",
+        "teamLogo": "/assets/images/teams/ferrari.png",
+        "teamColor": "#F91536"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 330, "wins": 105, "poles": 106, "laps": 18500, "dnf": 30, "top10s": 290, "podiums": 198 },
+      "sprint": { "races": 18, "points": 130, "wins": 5, "podiums": 10, "poles": 6, "top10s": 18 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Ferrari",
+      "position": 6,
+      "points": 150,
+      "wins": 1,
+      "podiums": 5,
+      "poles": 1,
+      "fastestLaps": 2,
+      "sprint": { "points": 14, "wins": 0, "podiums": 1 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "russell_george",
+      "driverNumber": 63,
+      "driverName": "George Russell",
+      "teamId": "mercedes",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/george-russell.avif",
+        "teamLogo": "/assets/images/teams/mercedes.png",
+        "teamColor": "#6CD3BF"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 120, "wins": 3, "poles": 5, "laps": 6800, "dnf": 10, "top10s": 90, "podiums": 15 },
+      "sprint": { "races": 14, "points": 95, "wins": 2, "podiums": 6, "poles": 3, "top10s": 13 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Mercedes",
+      "position": 4,
+      "points": 172,
+      "wins": 1,
+      "podiums": 7,
+      "poles": 2,
+      "fastestLaps": 2,
+      "sprint": { "points": 18, "wins": 0, "podiums": 2 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "alonso_fernando",
+      "driverNumber": 14,
+      "driverName": "Fernando Alonso",
+      "teamId": "aston_martin",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/fernando-alonso.avif",
+        "teamLogo": "/assets/images/teams/aston.png",
+        "teamColor": "#358C75"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 390, "wins": 32, "poles": 22, "laps": 19500, "dnf": 45, "top10s": 310, "podiums": 105 },
+      "sprint": { "races": 18, "points": 90, "wins": 1, "podiums": 5, "poles": 1, "top10s": 17 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Aston Martin",
+      "position": 11,
+      "points": 26,
+      "wins": 0,
+      "podiums": 1,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 6, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "antonelli_kimi",
+      "driverNumber": 12,
+      "driverName": "Kimi Antonelli",
+      "teamId": "mercedes",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/kimi-antonelli.avif",
+        "teamLogo": "/assets/images/teams/mercedes.png",
+        "teamColor": "#6CD3BF"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 12, "wins": 0, "poles": 0, "laps": 600, "dnf": 2, "top10s": 6, "podiums": 0 },
+      "sprint": { "races": 4, "points": 8, "wins": 0, "podiums": 0, "poles": 0, "top10s": 3 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Mercedes",
+      "position": 7,
+      "points": 64,
+      "wins": 0,
+      "podiums": 1,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 8, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "stroll_lance",
+      "driverNumber": 18,
+      "driverName": "Lance Stroll",
+      "teamId": "aston_martin",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/lance-stroll.avif",
+        "teamLogo": "/assets/images/teams/aston.png",
+        "teamColor": "#358C75"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 165, "wins": 0, "poles": 1, "laps": 9800, "dnf": 25, "top10s": 80, "podiums": 3 },
+      "sprint": { "races": 14, "points": 50, "wins": 0, "podiums": 1, "poles": 0, "top10s": 10 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Aston Martin",
+      "position": 12,
+      "points": 26,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 5, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "gasly_pierre",
+      "driverNumber": 10,
+      "driverName": "Pierre Gasly",
+      "teamId": "alpine",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/pierre-gasly.avif",
+        "teamLogo": "/assets/images/teams/alpine.png",
+        "teamColor": "#2293D1"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 160, "wins": 1, "poles": 1, "laps": 9600, "dnf": 20, "top10s": 110, "podiums": 4 },
+      "sprint": { "races": 14, "points": 55, "wins": 0, "podiums": 1, "poles": 0, "top10s": 11 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Alpine",
+      "position": 14,
+      "points": 20,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 4, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "ocon_esteban",
+      "driverNumber": 31,
+      "driverName": "Esteban Ocon",
+      "teamId": "haas",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/esteban-ocon.avif",
+        "teamLogo": "/assets/images/teams/haasSmall.png",
+        "teamColor": "#B6BABD"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 170, "wins": 1, "poles": 0, "laps": 9900, "dnf": 22, "top10s": 115, "podiums": 4 },
+      "sprint": { "races": 14, "points": 55, "wins": 0, "podiums": 1, "poles": 0, "top10s": 11 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Haas",
+      "position": 10,
+      "points": 27,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 5, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "tsunoda_yuki",
+      "driverNumber": 22,
+      "driverName": "Yuki Tsunoda",
+      "teamId": "red_bull",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/yuki-tsunoda.avif",
+        "teamLogo": "/assets/images/teams/redbull.png",
+        "teamColor": "#3671C6"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 110, "wins": 0, "poles": 0, "laps": 6600, "dnf": 12, "top10s": 50, "podiums": 1 },
+      "sprint": { "races": 12, "points": 40, "wins": 0, "podiums": 1, "poles": 0, "top10s": 9 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Red Bull Racing",
+      "position": 18,
+      "points": 10,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 2, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "hadjar_isack",
+      "driverNumber": 6,
+      "driverName": "Isack Hadjar",
+      "teamId": "rb",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/isack-hadjar.avif",
+        "teamLogo": "/assets/images/teams/rb.png",
+        "teamColor": "#5E8FAA"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 12, "wins": 0, "poles": 0, "laps": 600, "dnf": 2, "top10s": 4, "podiums": 0 },
+      "sprint": { "races": 4, "points": 6, "wins": 0, "podiums": 0, "poles": 0, "top10s": 2 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "RB",
+      "position": 13,
+      "points": 22,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 3, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "lawson_liam",
+      "driverNumber": 30,
+      "driverName": "Liam Lawson",
+      "teamId": "rb",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/liam-lawson.avif",
+        "teamLogo": "/assets/images/teams/rb.png",
+        "teamColor": "#5E8FAA"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 20, "wins": 0, "poles": 0, "laps": 1100, "dnf": 2, "top10s": 6, "podiums": 0 },
+      "sprint": { "races": 6, "points": 10, "wins": 0, "podiums": 0, "poles": 0, "top10s": 3 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "RB",
+      "position": 15,
+      "points": 20,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 2, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "bortoleto_gabriel",
+      "driverNumber": 5,
+      "driverName": "Gabriel Bortoleto",
+      "teamId": "stake_sauber",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/gabriel-bortoleto.avif",
+        "teamLogo": "/assets/images/teams/kick.png",
+        "teamColor": "#C92D4B"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 12, "wins": 0, "poles": 0, "laps": 600, "dnf": 2, "top10s": 2, "podiums": 0 },
+      "sprint": { "races": 4, "points": 4, "wins": 0, "podiums": 0, "poles": 0, "top10s": 2 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Stake F1 Kick Sauber",
+      "position": 17,
+      "points": 14,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 1, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "bearman_oliver",
+      "driverNumber": 20,
+      "driverName": "Oliver Bearman",
+      "teamId": "haas",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/oliver-bearman.avif",
+        "teamLogo": "/assets/images/teams/haasSmall.png",
+        "teamColor": "#B6BABD"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 20, "wins": 0, "poles": 0, "laps": 1200, "dnf": 3, "top10s": 4, "podiums": 0 },
+      "sprint": { "races": 6, "points": 6, "wins": 0, "podiums": 0, "poles": 0, "top10s": 3 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Haas",
+      "position": 19,
+      "points": 8,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 1, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "hulkenberg_nico",
+      "driverNumber": 27,
+      "driverName": "Nico Hulkenberg",
+      "teamId": "stake_sauber",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/nico-hulkenberg.avif",
+        "teamLogo": "/assets/images/teams/kick.png",
+        "teamColor": "#C92D4B"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 210, "wins": 0, "poles": 1, "laps": 11200, "dnf": 35, "top10s": 110, "podiums": 0 },
+      "sprint": { "races": 12, "points": 45, "wins": 0, "podiums": 0, "poles": 0, "top10s": 10 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Stake F1 Kick Sauber",
+      "position": 9,
+      "points": 10,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 2, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "albon_alex",
+      "driverNumber": 23,
+      "driverName": "Alex Albon",
+      "teamId": "williams",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/alex-albon.avif",
+        "teamLogo": "/assets/images/teams/williams.png",
+        "teamColor": "#64C4FF"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 130, "wins": 0, "poles": 0, "laps": 7200, "dnf": 15, "top10s": 60, "podiums": 2 },
+      "sprint": { "races": 12, "points": 40, "wins": 0, "podiums": 0, "poles": 0, "top10s": 9 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Williams",
+      "position": 8,
+      "points": 54,
+      "wins": 0,
+      "podiums": 1,
+      "poles": 0,
+      "fastestLaps": 1,
+      "sprint": { "points": 6, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  },
+  {
+    "base": {
+      "driverId": "colapinto_franco",
+      "driverNumber": 43,
+      "driverName": "Franco Colapinto",
+      "teamId": "alpine",
+      "nationality": "",
+      "birthDate": "",
+      "assets": {
+        "image": "/assets/images/driver/franco-colapinto.avif",
+        "teamLogo": "/assets/images/teams/alpine.png",
+        "teamColor": "#2293D1"
+      },
+      "updatedAt": 1699999999999
+    },
+    "career": {
+      "gp": { "races": 10, "wins": 0, "poles": 0, "laps": 500, "dnf": 2, "top10s": 1, "podiums": 0 },
+      "sprint": { "races": 4, "points": 2, "wins": 0, "podiums": 0, "poles": 0, "top10s": 1 },
+      "source": "estimates-2025-08-15",
+      "updatedAt": 1699999999999
+    },
+    "season": {
+      "year": 2025,
+      "team": "Alpine",
+      "position": 20,
+      "points": 0,
+      "wins": 0,
+      "podiums": 0,
+      "poles": 0,
+      "fastestLaps": 0,
+      "sprint": { "points": 0, "wins": 0, "podiums": 0 },
+      "updatedAt": 1699999999999
+    }
+  }
+]
