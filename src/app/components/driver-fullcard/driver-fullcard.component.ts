@@ -31,5 +31,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class DriverFullcardComponent {
 
+  driverInput: string ='career';
+
   @Input() driver!:Driver;
 }

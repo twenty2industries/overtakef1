@@ -8,8 +8,8 @@ section {
   .driver-team {
 
     height: 13vh;
-background: 
-  linear-gradient(to bottom, #000000 0%, #000000 10%, transparent 100%);
+    background:
+      linear-gradient(to bottom, #000000 0%, #000000 10%, transparent 100%);
     display: flex;
     justify-content: center;
 
@@ -21,7 +21,7 @@ background:
     }
   }
 
-  .driver-image {
+  .driver-container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -38,8 +38,10 @@ background:
   }
 
   .driver-input {
+    
+    flex-direction: column;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: start;
     width: 100%;
     padding: 2em;
@@ -58,4 +60,45 @@ background:
     }
   }
 
+  .button-container {
+    z-index: 1;
+    width: 50%;
+    button {
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      border: none;
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 5vh;
+      font-size: 2em;
+      font-weight: bold;
+      transition: ease-in-out 0.2s;
+    }
+  }
+
+  .base-container {
+    font-size: 1.6em;
+    height: 100%;
+    width: 100%;
+
+    h3 {
+      font-weight: normal;
+      font-size: 1.6em;
+    }
+  }
+
+  .details{
+        width: 50%;
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .input{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
 }
