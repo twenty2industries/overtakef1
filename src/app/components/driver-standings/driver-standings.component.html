@@ -9,8 +9,6 @@
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
   </div>
 
-
-
   <div class="standing-cards">
     @switch (openMenu) {
     @case ('constructor-standing') {
@@ -27,7 +25,7 @@
         <div class="constructor-position-points">
           <div class="points-wrapper">
 
-            <div class="position">#{{$index + 1}}</div>
+            <div class="position">Pos. {{$index + 1}}</div>
             <div class="constructor-points">{{team.points}} pts</div>
           </div>
           <div class="car-container">
@@ -52,7 +50,7 @@
         </div>
         <div class="position-points">
           <div class="points-wrapper">
-            <div class="position">#{{$index + 1}}</div>
+            <div class="position">Pos. {{$index + 1}}</div>
             <div class="driver-points">{{driver.season.points}} pts</div>
           </div>
           <div class="driver-image-container">
@@ -67,6 +65,9 @@
     <div class="fade-wrapper" @fadeSlide>
       @for (driver of (driver$ | async); track $index) {
       <div (click)="openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
+        <div class="driver-number-container">
+          <h1>{{driver.base.driverNumber}}</h1>
+        </div>
         <div class="team-driver-name">
           <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
           <div class="hyphen"></div>
@@ -76,7 +77,7 @@
         </div>
         <div class="position-points">
           <div class="points-wrapper">
-            <div class="position">#{{$index + 1}}</div>
+            <div class="position">Pos. {{$index + 1}}</div>
             <div class="driver-points">{{driver.season.points}} pts</div>
           </div>
           <div class="driver-image-container">
