@@ -46,8 +46,15 @@ export class StandingsDataService {
     document.body.classList.add('modal-open');
   }
 
-  closeDriverFullCard() {
-    this.selectedUser = null;
-    document.body.classList.remove('modal-open');
+closeDriverFullCard() {
+  const card = document.querySelector('app-driver-fullcard');
+  if (card) {
+    card.classList.add('fade-out');
+    card.addEventListener('animationend', () => {
+      this.selectedUser = null;
+    }, { once: true });
   }
+  document.body.classList.remove('modal-open');
+}
+
 }

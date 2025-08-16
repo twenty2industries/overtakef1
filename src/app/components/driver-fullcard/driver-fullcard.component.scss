@@ -46,7 +46,7 @@ section {
       position: absolute;
       left: 50%;
       bottom: 0rem;
-      top: 67%;
+      top: 79%;
       transform: translateX(-50%);
       z-index: 1;
       pointer-events: none;
@@ -66,6 +66,7 @@ section {
     justify-content: space-between;
     align-items: start;
     width: 80%;
+    height: 80%;
 
     h1 {
       font-size: 2.6em;
@@ -103,34 +104,35 @@ section {
   }
 
   .base-container {
+    animation: fadeIn 0.3s ease-in-out forwards;
     overflow-y: auto;
     font-size: 1.6em;
     height: 90vh;
     width: 100%;
 
-h3 {
-  position: relative;
-  font-family: 'Titillium Web';
-  font-size: 2rem;
+    h3 {
+      position: relative;
+      font-family: 'Titillium Web';
+      font-size: 2rem;
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -6px; 
-    transform: translateX(-50%);
-    width: 100%;  
-    height: 2px;
-    background: currentColor;
-    border-radius: 2px;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -6px;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+      }
+    }
   }
-  }
-  }
+
   .details {
     width: 100%;
     display: flex;
     justify-content: space-between;
-
   }
 
   .input {
@@ -139,4 +141,8 @@ h3 {
     justify-content: space-around;
     height: 100%;
   }
+}
+
+.container-fade-out{
+    animation: fadeOutRight 0.4s ease-out forwards;
 }
