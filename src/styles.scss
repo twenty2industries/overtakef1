@@ -34,3 +34,12 @@
   font-weight: 400;
   src: url('../public/assets/fonts/titillium-web-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+/* great-vibes-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../public/assets/fonts/great-vibes-v20-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}

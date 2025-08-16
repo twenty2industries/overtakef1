@@ -1,60 +1,71 @@
 section {
   display: flex;
+  align-items: center;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   color: white;
+  overflow-y: auto;
 
   .driver-team {
-    padding-top: 30px;
+    height: 10%;
+    width: 100%;
     background:
       linear-gradient(to bottom, #000000 0%, #000000 10%, transparent 100%);
     display: flex;
     justify-content: center;
 
     img {
-      margin-top: 10px;
+      margin-top: 15px;
       width: 80%;
-      height: 8vh;
       object-fit: contain;
     }
   }
 
-  .driver-container {
-    overflow-y: auto;
+  .img-container {
+    position: relative;
     width: 100%;
-    height: 100%;
-    display: flex;
-    _justify-content: center;
-    flex-direction: column;
+    height: 80%;
 
-.img-container {
-  width: 100%;
-  height: 87vh;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
+      /* Fade-Out ins Transparente */
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+    }
 
-    /* Fade-Out ins Transparente */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
-    mask-repeat: no-repeat;
-    mask-size: 100% 100%;
+    .name-container {
+      position: absolute;
+      left: 50%;
+      bottom: 0rem;
+      top: 67%;
+      transform: translateX(-50%);
+      z-index: 1;
+      pointer-events: none;
+
+      h3 {
+        text-align: center;
+        font-family: 'Great Vibes';
+        font-size: 2.8rem;
+      }
+    }
   }
-}
 
-  }
 
   .driver-input {
     flex-direction: column;
     display: flex;
     justify-content: space-between;
     align-items: start;
-    padding: 2em;
+    width: 80%;
 
     h1 {
       font-size: 2.6em;
@@ -71,20 +82,20 @@ section {
   }
 
   .button-container {
-    position: fixed;
+    position: sticky;
     bottom: 0;
     display: flex;
     z-index: 1;
     width: 100%;
 
     button {
+      height: 10vh;
       width: 100%;
       cursor: pointer;
       color: rgb(0, 0, 0);
       border: none;
       background-position: center;
       background-size: cover;
-      height: 5vh;
       font-size: 2em;
       font-weight: bold;
       transition: ease-in-out 0.2s;
@@ -94,15 +105,27 @@ section {
   .base-container {
     overflow-y: auto;
     font-size: 1.6em;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
 
-    h3 {
-      font-weight: normal;
-      font-size: 1.6em;
-    }
-  }
+h3 {
+  position: relative;
+  font-family: 'Titillium Web';
+  font-size: 2rem;
 
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px; 
+    transform: translateX(-50%);
+    width: 100%;  
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+  }
+  }
   .details {
     width: 100%;
     display: flex;
