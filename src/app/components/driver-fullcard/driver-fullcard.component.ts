@@ -3,6 +3,8 @@ import driver from '../../../data/driver.json';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import constructor from '../../../data/constructor.json';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { StandingsDataService } from '../../shared/services/standings-data.service';
+
 
 
 @Component({
@@ -34,4 +36,8 @@ export class DriverFullcardComponent {
   driverInput: string ='career';
 
   @Input() driver!:Driver;
+
+  constructor(public standingsDataService: StandingsDataService){
+
+  }
 }

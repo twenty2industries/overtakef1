@@ -3,11 +3,9 @@ section {
   flex-direction: column;
   height: 100%;
   color: white;
-  border-radius: 10px 10px 90px 10px;
 
   .driver-team {
-
-    height: 13vh;
+    padding-top: 30px;
     background:
       linear-gradient(to bottom, #000000 0%, #000000 10%, transparent 100%);
     display: flex;
@@ -22,28 +20,40 @@ section {
   }
 
   .driver-container {
+    overflow-y: auto;
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    _justify-content: center;
+    flex-direction: column;
 
-    img {
-      position: absolute;
-      right: 2em;
-      height: 70vh;
-      width: 34%;
-      object-fit: contain;
-    }
+.img-container {
+  width: 100%;
+  height: 87vh;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+
+    /* Fade-Out ins Transparente */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+  }
+}
+
   }
 
   .driver-input {
-    
     flex-direction: column;
     display: flex;
     justify-content: space-between;
     align-items: start;
-    width: 100%;
     padding: 2em;
 
     h1 {
@@ -61,15 +71,19 @@ section {
   }
 
   .button-container {
+    position: fixed;
+    bottom: 0;
+    display: flex;
     z-index: 1;
-    width: 50%;
+    width: 100%;
+
     button {
+      width: 100%;
       cursor: pointer;
-      color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
       border: none;
       background-position: center;
       background-size: cover;
-      width: 100%;
       height: 5vh;
       font-size: 2em;
       font-weight: bold;
@@ -78,8 +92,9 @@ section {
   }
 
   .base-container {
+    overflow-y: auto;
     font-size: 1.6em;
-    height: 100%;
+    height: 100vh;
     width: 100%;
 
     h3 {
@@ -88,14 +103,14 @@ section {
     }
   }
 
-  .details{
-        width: 50%;
+  .details {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 
   }
 
-  .input{
+  .input {
     display: flex;
     flex-direction: column;
     justify-content: space-around;

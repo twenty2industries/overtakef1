@@ -9,31 +9,45 @@ import driver from '../../../data/driver.json';
 import constructor from '../../../data/constructor.json';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class StandingsDataService {
+  selectedUser: Driver | null = null;
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getDriverStandings$(): Observable<Standing[]> { // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
-    return of(standings).pipe(map(a => [...a].sort((x,y)=>y.points-x.points)));
+  getDriverStandings$(): Observable<Standing[]> {
+    // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
+    return of(standings).pipe(
+      map((a) => [...a].sort((x, y) => y.points - x.points))
+    );
   }
 
-    getDriver$(): Observable<Driver[]> { // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
-    return of(driver).pipe(map(a => [...a].sort((x,y)=>y.season.points-x.season.points)));
+  getDriver$(): Observable<Driver[]> {
+    // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
+    return of(driver).pipe(
+      map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
+    );
   }
 
-    getConstructorStandings$(): Observable<Constructor[]> {
-    return of(constructor).pipe(map(a => [...a].sort((x,y)=>y.points-x.points)));
+  getConstructorStandings$(): Observable<Constructor[]> {
+    return of(constructor).pipe(
+      map((a) => [...a].sort((x, y) => y.points - x.points))
+    );
   }
 
-    get2025Races() {
+  get2025Races() {
     return this.http.get('https://api.openf1.org/v1/sessions?year=2025');
   }
 
+  openDriverFullCard(driver: Driver) {
+    this.selectedUser = driver;
+    document.body.classList.add('modal-open');
+  }
 
+  closeDriverFullCard() {
+    this.selectedUser = null;
+    document.body.classList.remove('modal-open');
+  }
 }

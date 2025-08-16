@@ -37,8 +37,7 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
 export class DriverStandingsComponent {
   @Input() driver!: Driver;
 
-      races: any[] = [];
-
+  races: any[] = [];
 
   openMenu: string = 'drivers-standing';
 
@@ -50,7 +49,6 @@ export class DriverStandingsComponent {
 
   loaded!: Signal<boolean>;
 
-  selectedUser: Driver | null = null;
 
   driverActive: boolean = true;
   constructorActive: boolean = false;
@@ -74,22 +72,11 @@ export class DriverStandingsComponent {
     );  
   }
 
-openDriverFullCard(driver: Driver) {
-  this.selectedUser = driver;
-  document.body.classList.add('modal-open');
-}
-
-closeDriverFullCard() {
-  this.selectedUser = null;
-  document.body.classList.remove('modal-open');
-}
-
 
     ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
       this.races = data;
-          console.log(this.races);
-    
+      console.log(this.races);
     });
 
   }
