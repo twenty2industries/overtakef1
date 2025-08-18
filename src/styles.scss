@@ -72,3 +72,10 @@
 app-driver-fullcard.fade-out {
   animation: fadeOut 0.2s ease-in forwards;
 }
+
+
+body.modal-open {
+  overflow: hidden;
+  height: 100dvh;
+  overscroll-behavior: contain; /* iOS/Android: kein Hintergrund-Scroll/Bounce */
+}
