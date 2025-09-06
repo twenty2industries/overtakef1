@@ -1,7 +1,7 @@
 import { Component, Input, Signal } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
-import { Constructor } from '../../shared/interfaces/constructor.interface';
+import { Team } from '../../shared/interfaces/constructor.interface';
 import standings from '../../../data/standings.json';
 import constructor from '../../../data/constructor.json';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -35,7 +35,6 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
 })
 
 export class DriverStandingsComponent {
-  @Input() driver!: Driver;
 
   races: any[] = [];
 
@@ -45,7 +44,7 @@ export class DriverStandingsComponent {
 
   driver$!: Observable<Driver[]>;
 
-  constructors$!: Observable<Constructor[]>;
+  constructors$!: Observable<Team[]>;
 
   loaded!: Signal<boolean>;
 

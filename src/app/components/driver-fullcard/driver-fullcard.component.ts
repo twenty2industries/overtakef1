@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import driver from '../../../data/driver.json';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
+import { Team } from '../../shared/interfaces/constructor.interface';
 import constructor from '../../../data/constructor.json';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
@@ -36,6 +37,9 @@ export class DriverFullcardComponent {
   driverInput: string ='career';
 
   @Input() driver!:Driver;
+
+    @Input() team!:Team;
+
 
   constructor(public standingsDataService: StandingsDataService){
 

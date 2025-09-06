@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Standing } from '../interfaces/driver.interface';
 import { Driver } from '../interfaces/driver.interface';
-import { Constructor } from '../interfaces//constructor.interface';
+import { Team } from '../interfaces//constructor.interface';
 import standings from '../../../data/standings.json';
 import driver from '../../../data/driver.json';
 import constructor from '../../../data/constructor.json';
@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StandingsDataService {
   selectedUser: Driver | null = null;
+  selectedConstructor: Team | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +32,7 @@ export class StandingsDataService {
     );
   }
 
-  getConstructorStandings$(): Observable<Constructor[]> {
+  getConstructorStandings$(): Observable<Team[]> {
     return of(constructor).pipe(
       map((a) => [...a].sort((x, y) => y.points - x.points))
     );
@@ -43,6 +44,11 @@ export class StandingsDataService {
 
   openDriverFullCard(driver: Driver) {
     this.selectedUser = driver;
+    document.body.classList.add('modal-open');
+  }
+
+    openConstructorFullCard(constructor: Team) {
+    this.selectedConstructor = constructor;
     document.body.classList.add('modal-open');
   }
 

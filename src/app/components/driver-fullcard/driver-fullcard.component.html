@@ -1,5 +1,6 @@
-<section @fadeSlide [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
   @if(driver){
+    <section @fadeSlide [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
+
       <div class="driver-team">
         <img [src]="driver.base.assets.teamLogo">
       </div>
@@ -126,5 +127,13 @@
       <button (click)="driverInput = 'driver'">Driver</button>
       <button (click)="standingsDataService.closeDriverFullCard()"><</button>
     </div>
+    </section>
   }
+
+ @if (team) {
+      <section @fadeSlide [style.background]="'linear-gradient(to right, ' + team.teamColor + ', transparent)'">
+
+<h1>TESTTESTSETSTES</h1>
 </section>
+}
+  

@@ -14,7 +14,7 @@
       @case ('constructor-standing') {
       <div class="fade-wrapper" @fadeSlide>
         @for (team of (constructors$ | async); track $index) {
-        <div class="constructor-cards"
+        <div (click)="standingsDataService.openConstructorFullCard(team)" class="constructor-cards"
           [style.background]=" 'linear-gradient(to right,' + team.teamColor + ', transparent)'">
           <div class="team-constructor-name">
             <div class="team-logo"><img [src]="team.logoPath"></div>
@@ -101,6 +101,11 @@
   @if ( standingsDataService.selectedUser) {
     <div class="overlay" (click)="standingsDataService.selectedUser = null"></div>
     <app-driver-fullcard [driver]="standingsDataService.selectedUser"></app-driver-fullcard>
+  }
+
+    @if ( standingsDataService.selectedConstructor) {
+    <div class="overlay" (click)="standingsDataService.selectedConstructor = null"></div>
+    <app-driver-fullcard [team]="standingsDataService.selectedConstructor"></app-driver-fullcard>
   }
 
 

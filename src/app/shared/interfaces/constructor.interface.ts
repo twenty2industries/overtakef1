@@ -1,4 +1,4 @@
-export interface Constructor {
+export interface Team {
   team: string;
   points: number;
   teamColor: string;
