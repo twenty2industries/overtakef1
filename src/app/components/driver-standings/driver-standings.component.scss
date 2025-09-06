@@ -5,6 +5,7 @@ section {
   display: flex;
   font-family: 'Inter';
   font-size: 10px;
+  margin-bottom: 10vh;
 
   .select-menu {
     position: fixed;
@@ -78,7 +79,7 @@ section {
     justify-content: space-between;
     margin: 1rem 0rem;
     border-radius: 10px;
-    height: 14vh;
+    height: 24vh;
 
     .team-constructor-name {
       padding-left: 10px;

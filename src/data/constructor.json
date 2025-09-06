@@ -4,69 +4,89 @@
     "points": 559,
     "teamColor": "#F58020",
     "logoPath": "/assets/images/teams/mclaren.png",
-    "carImagePath": "/assets/images/cars/mclaren.avif"
+    "carImagePath": "/assets/images/cars/mclaren.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Ferrari",
     "points": 301,
     "teamColor": "#F91536",
     "logoPath": "/assets/images/teams/ferrari.png",
-    "carImagePath": "/assets/images/cars/ferrari.avif"
+    "carImagePath": "/assets/images/cars/ferrari.avif",
+    "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Mercedes",
     "points": 236,
     "teamColor": "#6CD3BF",
     "logoPath": "/assets/images/teams/mercedes.png",
-    "carImagePath": "/assets/images/cars/mercedes.avif"
+    "carImagePath": "/assets/images/cars/mercedes.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Red Bull Racing",
     "points": 197,
     "teamColor": "#3671C6",
     "logoPath": "/assets/images/teams/redbull.png",
-    "carImagePath": "/assets/images/cars/redbull.avif"
+    "carImagePath": "/assets/images/cars/redbull.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Williams",
     "points": 70,
     "teamColor": "#64C4FF",
     "logoPath": "/assets/images/teams/williams.png",
-    "carImagePath": "/assets/images/cars/williams.avif"
+    "carImagePath": "/assets/images/cars/williams.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Aston Martin",
     "points": 52,
     "teamColor": "#358C75",
     "logoPath": "/assets/images/teams/aston.png",
-    "carImagePath": "/assets/images/cars/astonmartin.avif"
+    "carImagePath": "/assets/images/cars/astonmartin.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "RB",
     "points": 42,
     "teamColor": "#5E8FAA",
     "logoPath": "/assets/images/teams/rb.png",
-    "carImagePath": "/assets/images/cars/racingbull.avif"
+    "carImagePath": "/assets/images/cars/racingbull.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Haas",
     "points": 35,
     "teamColor": "#B6BABD",
     "logoPath": "/assets/images/teams/haasSmall.png",
-    "carImagePath": "/assets/images/cars/haas.avif"
+    "carImagePath": "/assets/images/cars/haas.avif",
+        "carImage": "/assets/images/teams/haas/haasTopView.webp"
+
   },
   {
     "team": "Stake F1 Kick Sauber",
     "points": 24,
     "teamColor": "#C92D4B",
     "logoPath": "/assets/images/teams/kick.png",
-    "carImagePath": "/assets/images/cars/kicksauber.avif"
+    "carImagePath": "/assets/images/cars/kicksauber.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   },
   {
     "team": "Alpine",
     "points": 20,
     "teamColor": "#2293D1",
     "logoPath": "/assets/images/teams/alpine.png",
-    "carImagePath": "/assets/images/cars/alpine.avif"
+    "carImagePath": "/assets/images/cars/alpine.avif",
+        "carImage": "/assets/images/teams/ferrari/sf25.avif"
+
   }
 ]

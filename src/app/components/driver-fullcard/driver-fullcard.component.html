@@ -131,9 +131,58 @@
   }
 
  @if (team) {
-      <section @fadeSlide [style.background]="'linear-gradient(to right, ' + team.teamColor + ', transparent)'">
+    <section @fadeSlide [style.background]="'linear-gradient(to right, ' + team.teamColor + ', transparent)'">
 
-<h1>TESTTESTSETSTES</h1>
-</section>
+      <div class="driver-team">
+        <img [src]="team.logoPath">
+      </div>
+      <div class="img-car-container">
+        <img [src]="team.carImage">
+        <div class="name-container">
+          <h3>{{driver.base.driverName}}</h3>
+        </div>
+      </div>
+      <div class="driver-input">
+            <div class="base-container">
+              <div class="input">
+                <h3>Driver Stats</h3>
+                <div class="details">
+                  <p>GP entered</p>
+                  <span>{{driver.career.gp.races}}</span>
+                </div>
+                <div class="details">
+                  <p>Wins</p>
+                  <span>{{driver.career.gp.wins}}</span>
+                </div>
+                <div class="details">
+                  <p>Poles</p>
+                  <span>{{driver.career.gp.poles}}</span>
+                </div>
+                <div class="details">
+                  <p>Top 10s</p>
+                  <span>{{driver.career.gp.top10s}}</span>
+                </div>
+                <div class="details">
+                  <p>Podiums</p>
+                  <span>{{driver.career.gp.podiums}}</span>
+                </div>
+                <div class="details">
+                  <p>laps</p>
+                  <span>{{driver.career.gp.laps}}</span>
+                </div>
+                <div class="details">
+                  <p>Dnf</p>
+                  <span>{{driver.career.gp.dnf}}</span>
+                </div>
+              </div>
+            </div>
+      </div>
+    <div class="button-container">
+      <button (click)="driverInput = 'career'">Career</button>
+      <button (click)="driverInput = 'season'">Season</button>
+      <button (click)="driverInput = 'driver'">Driver</button>
+      <button (click)="standingsDataService.closeDriverFullCard()"><</button>
+    </div>
+    </section>
 }
   

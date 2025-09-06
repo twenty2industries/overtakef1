@@ -59,6 +59,43 @@ section {
     }
   }
 
+    .img-car-container {
+    position: relative;
+    width: 100%;
+    height: 80%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+
+      /* Fade-Out ins Transparente */
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: 100% 100%;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+    }
+
+    .name-container {
+      position: absolute;
+      left: 50%;
+      bottom: 0rem;
+      top: 79%;
+      transform: translateX(-50%);
+      z-index: 1;
+      pointer-events: none;
+
+      h3 {
+        text-align: center;
+        font-family: 'Great Vibes';
+        font-size: 2.8rem;
+      }
+    }
+  }
+
 
   .driver-input {
     flex-direction: column;

@@ -4,4 +4,6 @@ export interface Team {
   teamColor: string;
   logoPath?: string;
   carImagePath?: string
+  carImage?: string
+
 }

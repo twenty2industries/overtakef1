@@ -58,6 +58,8 @@ closeDriverFullCard() {
     card.classList.add('fade-out');
     card.addEventListener('animationend', () => {
       this.selectedUser = null;
+            this.selectedConstructor = null;
+
     }, { once: true });
   }
   document.body.classList.remove('modal-open');
