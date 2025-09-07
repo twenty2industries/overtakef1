@@ -59,7 +59,8 @@ section {
     }
   }
 
-    .img-car-container {
+    .img-car-container-fullcard {
+    animation: carFadeInUp 1s ease-out forwards;
     position: relative;
     width: 100%;
     height: 80%;
