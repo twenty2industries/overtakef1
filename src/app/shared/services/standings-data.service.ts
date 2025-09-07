@@ -20,26 +20,25 @@ export class StandingsDataService {
   selectedUser: Driver | null = null;
   selectedConstructor: Team | null = null;
   private destroyRef = inject(DestroyRef);
-private oscarStandingSubject = new BehaviorSubject<any | null>(null);
-public oscarStanding$ = this.oscarStandingSubject.asObservable();
-oscarStanding: any | null = null;
+  private oscarStandingSubject = new BehaviorSubject<any | null>(null);
+  public oscarStanding$ = this.oscarStandingSubject.asObservable();
+  oscarStanding: any | null = null;
 
 
 
   constructor(private http: HttpClient) {
     this.getLiveDriverStandingOscar();
     interval(3000).pipe(
-  switchMap(() => this.http.get<any[]>(
-    'https://api.openf1.org/v1/position?session_key=latest&driver_number=81'
-  )),
-  takeUntilDestroyed(this.destroyRef)
-).subscribe(arr => {
-  const latest = arr[arr.length - 1];
-  this.oscarStanding = latest;
-  console.log(this.oscarStanding);
-  
-  this.oscarStandingSubject.next(latest);
-});
+      switchMap(() => this.http.get<any[]>(
+        'https://api.openf1.org/v1/position?session_key=latest&driver_number=81'
+      )),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(arr => {
+      const latest = arr[arr.length - 1];
+      this.oscarStanding = latest;
+      console.log(this.oscarStanding);
+      this.oscarStandingSubject.next(latest);
+    });
   }
 
   getDriverStandings$(): Observable<Standing[]> {
@@ -95,12 +94,12 @@ oscarStanding: any | null = null;
   }
 
   getLiveDriverStandingOscar() {
-  fetch("https://api.openf1.org/v1/position?session_key=latest&driver_number=81")
-    .then((response) => response.json())
-    .then((jsonContent) => {
-      this.oscarStanding = jsonContent[jsonContent.length - 1];
-      console.log("Oscar Piastri aktuelle Position:", this.oscarStanding.position);
-    });
-}
+    fetch("https://api.openf1.org/v1/position?session_key=latest&driver_number=81")
+      .then((response) => response.json())
+      .then((jsonContent) => {
+        this.oscarStanding = jsonContent[jsonContent.length - 1];
+        console.log("Oscar Piastri aktuelle Position:", this.oscarStanding.position);
+      });
+  }
 
 }
