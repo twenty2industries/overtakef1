@@ -7,6 +7,8 @@
       <button (click)="openMenu = 'constructor-standing'" [class.button-active]="constructorActive"
         (click)="constructorActive = true; driverActive = false"
         [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
+        <button (click)="startSim(100)">Simulation starten</button>
+
     </div>
     <div class="standing-cards">
       @switch (openMenu) {
@@ -37,10 +39,6 @@
           <div class="fade-wrapper" @fadeSlide>
             @for (driver of (driver$ | async); track $index) {
               <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
-
-                <div class="live-data">
-                  <h1>{{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</h1>
-                </div>
                 <div class="driver-number-container">
                   <h1>{{ driver.base.driverNumber}}</h1>
                 </div>
@@ -55,10 +53,12 @@
                   <div class="points-wrapper">
                     <div class="position">Pos. {{$index + 1}}</div>
                     <div class="driver-points">{{driver.season.points}} PTS</div>
+                  <span>Live Position: {{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</span>
                   </div>
                   <div class="driver-image-container">
                     <img class="driver" [src]="driver.base.assets.image">
                   </div>
+                  
                 </div>
               </div>
             }
@@ -68,7 +68,6 @@
           <div class="fade-wrapper" @fadeSlide>
             @for (driver of (driver$ | async); track $index) {
               <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
-
                 <div class="driver-number-container">
                   <h1>{{ driver.base.driverNumber}}</h1>
                 </div>
