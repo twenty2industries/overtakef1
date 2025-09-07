@@ -11,8 +11,6 @@
         </div>
       </div>
       <div class="driver-input">
-
-
         @switch (driverInput) {
           @case ('career') {
             <div class="base-container">
@@ -49,7 +47,7 @@
               </div>
             </div>
           }
-                    @case ('season') {
+          @case ('season') {
             <div class="base-container">
               <div class="input">
                 <h3>Season Stats</h3>
@@ -84,7 +82,7 @@
               </div>
             </div>
           }
-                              @case ('driver') {
+          @case ('driver') {
             <div class="base-container">
               <div class="input">
                 <h3>Career Stats</h3>
@@ -130,9 +128,8 @@
     </section>
   }
 
- @if (team) {
+  @if (team) {
     <section @fadeSlide [style.background]="'linear-gradient(to right, ' + team.teamColor + ', transparent)'">
-
       <div class="driver-team">
         <img [src]="team.logoPath">
       </div>
@@ -184,5 +181,5 @@
       <button (click)="standingsDataService.closeDriverFullCard()"><</button>
     </div>
     </section>
-}
+  }
   

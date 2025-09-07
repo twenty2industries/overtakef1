@@ -33,9 +33,7 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
     ]),
   ],
 })
-
 export class DriverStandingsComponent {
-
   races: any[] = [];
 
   openMenu: string = 'drivers-standing';
@@ -48,16 +46,15 @@ export class DriverStandingsComponent {
 
   loaded!: Signal<boolean>;
 
-
   driverActive: boolean = true;
   constructorActive: boolean = false;
 
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
-    this.driver$ = this.standingsDataService.getDriver$();    
+    this.driver$ = this.standingsDataService.getDriver$();
 
-/*   this.loaded = toSignal(
+    /*   this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(
         map(() => true),
         delay(1500) // Ladezeit simulieren
@@ -65,19 +62,17 @@ export class DriverStandingsComponent {
       { initialValue: false }
     ); */
 
-       this.loaded = toSignal(
+    this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
-    );   
+    );
   }
 
-
-    ngOnInit() {
+  ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
       this.races = data;
       console.log(this.races);
     });
-
+    this.standingsDataService.getLiveDriverPosition();
   }
-
 }
