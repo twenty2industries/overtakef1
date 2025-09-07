@@ -41,6 +41,8 @@
       <div class="fade-wrapper" @fadeSlide>
         @for (driver of (driver$ | async); track $index) {
         <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
+<h1>{{ (standingsDataService.oscarStanding$ | async)?.position }}</h1>
+
           <div class="team-driver-name">
             <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
             <div class="hyphen"></div>
@@ -65,8 +67,9 @@
         <div class="fade-wrapper" @fadeSlide>
           @for (driver of (driver$ | async); track $index) {
           <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
+<h1>{{ (standingsDataService.oscarStanding$ | async)?.position }}</h1>
             <div class="driver-number-container">
-              <h1>{{driver.base.driverNumber}}</h1>
+<h1>{{ (standingsDataService.oscarStanding$ | async)?.position }}</h1>
             </div>
             <div class="team-driver-name">
               <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
