@@ -1,5 +1,5 @@
 import { Component, Input, Signal } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
 import standings from '../../../data/standings.json';
@@ -12,7 +12,7 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
 
 @Component({
   selector: 'app-driver-standings',
-  imports: [AsyncPipe, DriverFullcardComponent],
+  imports: [AsyncPipe, DriverFullcardComponent, DatePipe],
   templateUrl: './driver-standings.component.html',
   styleUrl: './driver-standings.component.scss',
   animations: [
@@ -31,6 +31,12 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
         ),
       ]),
     ]),
+    // <<< NEU: smooth vertical move >>>
+    trigger('verticalMove', [
+      transition('* => *', [
+        animate('400ms ease-in-out', style({ transform: 'translateY(0)' })),
+      ]),
+    ]),
   ],
 })
 export class DriverStandingsComponent {
@@ -43,18 +49,22 @@ export class DriverStandingsComponent {
   driverActive: boolean = true;
   constructorActive: boolean = false;
 
+  driversSimSorted$!: Observable<Driver[]>;
+
   // <<< NEW: einfacher Modus-Schalter >>>
-  useSimulation: boolean = true; // true = Simulation, false = Live
+  useSimulation: boolean = false; // true = Simulation, false = Live
 
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
     this.driver$ = this.standingsDataService.getDriver$();
+    this.sortWithNewestData();
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
     );
   }
+
 
   ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
@@ -62,18 +72,46 @@ export class DriverStandingsComponent {
     });
     if (this.useSimulation) {
       this.startSim(1); // Simulation starten
-      console.log(this.useSimulation);
-    } else {
-      this.standingsDataService.getLiveDriverPosition(); // Live-Polling starten
     }
   }
 
+  sortWithLiveData(){
+    this.driversSimSorted$ = combineLatest([ // LIVEDATA SORTING OPTION 
+      this.driver$,
+      this.standingsDataService.driverStandingMap$, // sorting option 
+    ]).pipe(
+      map(([drivers, mapObj]) =>
+        [...drivers].sort((a, b) => {
+          const pa = mapObj?.[a.base.driverNumber]?.position ?? 99;
+          const pb = mapObj?.[b.base.driverNumber]?.position ?? 99;
+          return pa - pb;
+        })
+      )
+    ); 
+  }
+
+  sortWithNewestData(){
+      this.driversSimSorted$ = combineLatest([
+      this.driver$,
+      this.standingsDataService.driverStandingMap$, // sorting option 
+    ]).pipe(
+      map(([drivers, mapObj]) =>
+        [...drivers].sort((a, b) => {
+          const pa = a.season.points ?? 0;
+          const pb = b.season.points ?? 0;
+          return pb - pa;
+        })
+      )
+    );
+  }
+
   startSim(speed: number = 1) {
-this.standingsDataService.loadSimulation(9912, true, 60, '2025-09-07T13:00:00Z');
+    this.sortWithLiveData();
+    this.standingsDataService.loadSimulation(9912, true, speed, '2025-09-07T13:00:00Z');
   }
 
   pauseSim() {
-    this.standingsDataService.pauseSimulation();
+    this.standingsDataService.stopSimulation();
   }
 
   seekSim(targetIso: string) {
@@ -81,6 +119,10 @@ this.standingsDataService.loadSimulation(9912, true, 60, '2025-09-07T13:00:00Z')
   }
 
   ngOnDestroy() {
-    this.standingsDataService.pauseSimulation();
+    this.standingsDataService.stopSimulation();
+  }
+
+  trackByDriver(index: number, d: Driver) {
+    return d.base.driverNumber;
   }
 }

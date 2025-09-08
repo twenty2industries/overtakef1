@@ -8,8 +8,16 @@ import {
   startWith,
   catchError,
 } from 'rxjs';
-import { from, timer, bufferCount, concatMap, retryWhen, scan, delayWhen } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  from,
+  timer,
+  bufferCount,
+  concatMap,
+  retryWhen,
+  scan,
+  delayWhen,
+} from 'rxjs';
+import { exhaustMap, map, toArray } from 'rxjs/operators';
 import { Standing } from '../interfaces/driver.interface';
 import { Driver } from '../interfaces/driver.interface';
 import { Team } from '../interfaces//constructor.interface';
@@ -33,84 +41,110 @@ export class StandingsDataService {
     {}
   );
   public driverStandingMap$ = this.driverStandingMapSubject.asObservable();
+
   driverStanding?: any | null = null;
 
   private simData: Record<number, any[]> = {};
   private simIndex: Record<number, number> = {};
-  private simTimerSub?: Subscription;
+  public simTimerSub?: Subscription;
   private simSpeed = 1; // 0.5, 1, 2, 4
+
   private simCurrentTs = 0; // ms since epoch
 
   private loadedDrivers = new Set<number>();
 
-
   private simMode = false;
   private livePollSub?: Subscription;
 
-  constructor(private http: HttpClient) { }
+  private simTimeSubject = new BehaviorSubject<number>(0); 
+  public simTime$ = this.simTimeSubject.asObservable();
 
-loadSimulation(sessionKey: number, autoStart: boolean = true, speed: number = 4, startAtIso?: string) {
-  this.simMode = true;
-  if (this.livePollSub) { this.livePollSub.unsubscribe(); this.livePollSub = undefined; }
+  constructor(private http: HttpClient) {
+  }
 
-  const nums = driver.map(d => d.base.driverNumber as number);
-  const batchSize = 3;
-  const baseDelayMs = 1000;
-
-  this.simData = {};
-  this.simIndex = {};
-  let minTs = Number.MAX_SAFE_INTEGER;
-
-  from(nums).pipe(
-    bufferCount(batchSize),
-    concatMap((chunk, i) =>
-      forkJoin(
-        chunk.map(n =>
-          this.http.get<any[]>(
-            `https://api.openf1.org/v1/position?session_key=${sessionKey}&driver_number=${n}`
-          ).pipe(
-            retryWhen(err$ => err$.pipe(
-              scan((acc, err) => {
-                if (err.status !== 429 || acc >= 3) throw err;
-                return acc + 1;
-              }, 0),
-              delayWhen(retry => timer((retry + 1) * 1000))
-            )),
-            catchError(() => of([]))
-          )
-        )
-      ).pipe(delayWhen(() => timer(i * baseDelayMs)))
-    )
-  ).subscribe(resultArrays => {
-    resultArrays.forEach(arr => {
-      const sorted = [...arr].sort((a, b) => +new Date(a.date) - +new Date(b.date));
-      if (sorted.length) {
-        const dn = sorted[0].driver_number;
-        this.simData[dn] = sorted;
-        this.simIndex[dn] = 0;
-        minTs = Math.min(minTs, +new Date(sorted[0].date));
-      }
-    });
-
-    if (Object.keys(this.simData).length) {
-      this.simCurrentTs = isFinite(minTs) ? minTs : 0;
-      for (const k in this.simData) this.driverStandingCache[+k] = this.simData[+k][0];
-      this.driverStandingMapSubject.next({ ...this.driverStandingCache });
-
-      if (startAtIso) { this.seekSimulation(startAtIso); } // <<< Rennstart setzen (z.B. '2025-09-07T13:00:00Z')
-
-      if (autoStart && !this.simTimerSub) {
-        this.startSimulation(speed);
-      }
+  loadSimulation(
+    sessionKey: number,
+    autoStart: boolean = false,
+    speed: number = 4,
+    startAtIso?: string
+  ) {
+    this.simMode = true;
+    if (this.livePollSub) {
+      this.livePollSub.unsubscribe();
+      this.livePollSub = undefined;
     }
-  });
-}
+    const nums = driver.map((d) => d.base.driverNumber as number);
+    const batchSize = 3;
+    const baseDelayMs = 1000;
+    this.simData = {};
+    this.simIndex = {};
+    let minTs = Number.MAX_SAFE_INTEGER;
+    from(nums)
+      .pipe(
+        bufferCount(batchSize),
+        concatMap((chunk, i) =>
+          forkJoin(
+            chunk.map((n) =>
+              this.http
+                .get<any[]>(
+                  `https://api.openf1.org/v1/position?session_key=${sessionKey}&driver_number=${n}`
+                )
+                .pipe(
+                  retryWhen((err$) =>
+                    err$.pipe(
+                      scan((acc, err) => {
+                        if (err.status !== 429 || acc >= 3) throw err;
+                        return acc + 1;
+                      }, 0),
+                      delayWhen((retry) => timer((retry + 1) * 1000))
+                    )
+                  ),
+                  catchError(() => of([]))
+                )
+            )
+          ).pipe(delayWhen(() => timer(i * baseDelayMs)))
+        )
+      )
+      .subscribe((resultArrays) => {
+        resultArrays.forEach((arr) => {
+          const sorted = [...arr].sort(
+            (a, b) => +new Date(a.date) - +new Date(b.date)
+          );
+          if (sorted.length) {
+            const dn = sorted[0].driver_number;
+            this.simData[dn] = sorted;
+            this.simIndex[dn] = 0;
+            minTs = Math.min(minTs, +new Date(sorted[0].date));
+          }
+        });
 
+        if (Object.keys(this.simData).length) {
+          this.simCurrentTs = isFinite(minTs) ? minTs : 0;
+          this.simTimeSubject.next(this.simCurrentTs); // << Zeit initial emitten
+          for (const k in this.simData)
+            this.driverStandingCache[+k] = this.simData[+k][0];
+          this.driverStandingMapSubject.next({ ...this.driverStandingCache });
 
-  startSimulation(speed: number = 4, tickMs: number = 250) {
+          if (startAtIso) { 
+            this.seekSimulation(startAtIso); 
+            this.simTimeSubject.next(this.simCurrentTs); 
+          }
+
+          if (autoStart && !this.simTimerSub) {
+            this.startSimulation(speed);
+          }
+        }
+      });
+  }
+
+  startSimulation(speed: number = 1, tickMs: number = 500) {
     this.simSpeed = speed;
     this.simMode = true;
-    if (this.livePollSub) { this.livePollSub.unsubscribe(); this.livePollSub = undefined; }
+    this.simTimeSubject.next(this.simCurrentTs);
+    if (this.livePollSub) {
+      this.livePollSub.unsubscribe();
+      this.livePollSub = undefined;
+    }
     this.stopSimulation();
     this.simTimerSub = interval(tickMs).subscribe(() => {
       this.simCurrentTs += tickMs * this.simSpeed;
@@ -119,22 +153,27 @@ loadSimulation(sessionKey: number, autoStart: boolean = true, speed: number = 4,
         const dn = +k;
         const arr = this.simData[dn] ?? [];
         let i = this.simIndex[dn] ?? 0;
-        while (i + 1 < arr.length && new Date(arr[i + 1].date).getTime() <= this.simCurrentTs) {
-          i++; changed = true;
+        while (
+          i + 1 < arr.length &&
+          new Date(arr[i + 1].date).getTime() <= this.simCurrentTs
+        ) {
+          i++;
+          changed = true;
         }
         this.simIndex[dn] = i;
         if (arr[i]) this.driverStandingCache[dn] = arr[i];
       }
-      if (changed) this.driverStandingMapSubject.next({ ...this.driverStandingCache });
+      if (changed)
+        this.driverStandingMapSubject.next({ ...this.driverStandingCache });
+        this.simTimeSubject.next(this.simCurrentTs); // << JEDEM Tick Zeit emitten
     });
-    console.log(tickMs);
-
   }
 
-  pauseSimulation() { this.stopSimulation(); /* Sim bleibt geladen */ }
-
-  private stopSimulation() {
-    if (this.simTimerSub) { this.simTimerSub.unsubscribe(); this.simTimerSub = undefined; }
+  stopSimulation() {
+    if (this.simTimerSub) {
+      this.simTimerSub.unsubscribe();
+      this.simTimerSub = undefined;
+    }
     this.simMode = false;
   }
 
@@ -155,25 +194,51 @@ loadSimulation(sessionKey: number, autoStart: boolean = true, speed: number = 4,
     this.driverStandingMapSubject.next({ ...this.driverStandingCache });
   }
 
+getLiveDriverPosition() {
+  if (this.simMode) return; // simulation hat vorrang
+  if (this.livePollSub) { this.livePollSub.unsubscribe(); this.livePollSub = undefined; }
 
-  getLiveDriverPosition() {
-    if (this.simMode) return; // simulation hat vorrang
-    const nums = driver.map(d => d.base.driverNumber);
-    this.livePollSub = interval(3000).pipe(
-      startWith(0),
-      switchMap(() =>
-        forkJoin(
-          nums.map(n =>
-            this.http
-              .get<any[]>(`https://api.openf1.org/v1/position?session_key=latest&driver_number=${n}`)
-              .pipe(catchError(() => of([])))
-          )
-        )
-      ),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(resultArrays => {
-      let changed = false;
-      resultArrays.forEach(arr => {
+  const nums = driver.map((d) => d.base.driverNumber);
+  const batchSize = 3;      // wie viele parallel
+  const baseDelayMs = 800;  // abstand zwischen batches
+
+  this.livePollSub = interval(3000).pipe(
+    startWith(0),
+    // warte, bis eine komplette runde fertig ist (alle batches), bevor die nächste startet
+    exhaustMap(() =>
+      from(nums).pipe(
+        bufferCount(batchSize),
+        concatMap((chunk, i) =>
+          forkJoin(
+            chunk.map((n) =>
+              this.http
+                .get<any[]>(
+                  `https://api.openf1.org/v1/position?session_key=latest&driver_number=${n}`
+                )
+                .pipe(
+                  retryWhen((err$) =>
+                    err$.pipe(
+                      scan((acc, err) => {
+                        if (err.status !== 429 || acc >= 2) throw err;
+                        return acc + 1;
+                      }, 0),
+                      delayWhen((retry) => timer((retry + 1) * 1000)) // 1s, 2s backoff
+                    )
+                  ),
+                  catchError(() => of([]))
+                )
+            )
+          ).pipe(delayWhen(() => timer(i * baseDelayMs)))
+        ),
+        toArray() // sammelt alle batch-ergebnisse dieser runde
+      )
+    ),
+    takeUntilDestroyed(this.destroyRef)
+  ).subscribe((batches) => {
+    // batches: Array< Array<any[]> >  -> erst batches, dann arrays je fahrer
+    let changed = false;
+    batches.forEach((resultArrays) => {
+      resultArrays.forEach((arr) => {
         const latest = arr?.[arr.length - 1] ?? null;
         if (latest && latest.driver_number != null) {
           this.driverStandingCache[latest.driver_number] = latest;
@@ -181,10 +246,12 @@ loadSimulation(sessionKey: number, autoStart: boolean = true, speed: number = 4,
           changed = true;
         }
       });
-      if (changed) this.driverStandingMapSubject.next({ ...this.driverStandingCache });
     });
-  }
-
+    if (changed) this.driverStandingMapSubject.next({ ...this.driverStandingCache });
+    // optional: progress
+    // console.log('live drivers updated:', Object.keys(this.driverStandingCache).length);
+  });
+}
 
   getDriverStandings$(): Observable<Standing[]> {
     // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
