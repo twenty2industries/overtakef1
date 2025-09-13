@@ -269,15 +269,15 @@ app-driver-fullcard {
   display: none;
 }
 
-.position-points-live{
-  height: auto;
+.position-points.position-points-live{
+  height: auto !important;
 }
 
 .first-name-live{
   width: 150px;
 }
 
-.flex-direction-unset{
-  display: flex;
-  flex-direction: row;
-}
+.driver-cards.flex-direction-unset { 
+  flex-direction :  row !important; 
+} // höhere Spezifität
+
