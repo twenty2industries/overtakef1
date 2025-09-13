@@ -50,6 +50,8 @@ export class DriverStandingsComponent {
 
   useSimulation: boolean = false; // true = Simulation, false = Live
 
+  simView: boolean = false;
+
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
@@ -102,13 +104,9 @@ export class DriverStandingsComponent {
   }
 
   startSim(speed: number = 1) {
+    this.simView = true;
     this.sortWithLiveData();
-    this.standingsDataService.loadSimulation(
-      9912,
-      true,
-      speed,
-      '2025-09-07T13:00:00Z'
-    );
+    this.standingsDataService.loadSimulation(9912, true, speed, '2025-09-07T13:00:00Z');
   }
 
   pauseSim() {

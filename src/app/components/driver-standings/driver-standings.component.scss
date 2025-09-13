@@ -137,9 +137,11 @@ section {
 
   .fade-wrapper {
     width: 95%;
-    .live-data{
+
+    .live-data {
       color: white;
     }
+
   }
 
   .driver-image-container {
@@ -240,11 +242,12 @@ app-driver-fullcard {
 
 }
 
-.test-buttons-container{
+.test-buttons-container {
   background-color: black;
   display: flex;
   flex-direction: column;
-  #test-button{
+
+  #test-button {
     height: auto;
     background-color: red;
     border: black 2px solid;
@@ -252,7 +255,29 @@ app-driver-fullcard {
   }
 }
 
-.simulation-test{
+.simulation-test {
   font-size: 11px;
+}
 
+
+.sim-view {
+  animation: simView 2s ease-in forwards;
+}
+
+.d_none{
+  font-size: 7px;
+  display: none;
+}
+
+.position-points-live{
+  height: auto;
+}
+
+.first-name-live{
+  width: 150px;
+}
+
+.flex-direction-unset{
+  display: flex;
+  flex-direction: row;
 }
