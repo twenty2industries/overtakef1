@@ -65,7 +65,7 @@ export class StandingsDataService {
   loadSimulation(
     sessionKey: number,
     autoStart: boolean = false,
-    speed: number = 4,
+    speed: number = 1,
     startAtIso?: string
   ) {
     this.simMode = true;
@@ -74,8 +74,8 @@ export class StandingsDataService {
       this.livePollSub = undefined;
     }
     const nums = driver.map((d) => d.base.driverNumber as number);
-    const batchSize = 3;
-    const baseDelayMs = 1000;
+    const batchSize = 6;
+    const baseDelayMs = 900;
     this.simData = {};
     this.simIndex = {};
     let minTs = Number.MAX_SAFE_INTEGER;
@@ -107,7 +107,7 @@ export class StandingsDataService {
       )
       .subscribe((resultArrays) => {
         resultArrays.forEach((arr) => {
-          const sorted = [...arr].sort(
+          const sorted = [...arr].sort( 
             (a, b) => +new Date(a.date) - +new Date(b.date)
           );
           if (sorted.length) {
@@ -120,7 +120,7 @@ export class StandingsDataService {
 
         if (Object.keys(this.simData).length) {
           this.simCurrentTs = isFinite(minTs) ? minTs : 0;
-          this.simTimeSubject.next(this.simCurrentTs); // << Zeit initial emitten
+          this.simTimeSubject.next(this.simCurrentTs); // << zeit initial emitten
           for (const k in this.simData)
             this.driverStandingCache[+k] = this.simData[+k][0];
           this.driverStandingMapSubject.next({ ...this.driverStandingCache });
@@ -140,7 +140,6 @@ export class StandingsDataService {
   startSimulation(speed: number = 1, tickMs: number = 500) {
     this.simSpeed = speed;
     this.simMode = true;
-    this.simTimeSubject.next(this.simCurrentTs);
     if (this.livePollSub) {
       this.livePollSub.unsubscribe();
       this.livePollSub = undefined;
@@ -165,7 +164,7 @@ export class StandingsDataService {
       }
       if (changed)
         this.driverStandingMapSubject.next({ ...this.driverStandingCache });
-        this.simTimeSubject.next(this.simCurrentTs); // << JEDEM Tick Zeit emitten
+        this.simTimeSubject.next(this.simCurrentTs); // << zeit emitten
     });
   }
 
@@ -199,12 +198,12 @@ getLiveDriverPosition() {
   if (this.livePollSub) { this.livePollSub.unsubscribe(); this.livePollSub = undefined; }
 
   const nums = driver.map((d) => d.base.driverNumber);
-  const batchSize = 3;      // wie viele parallel
+  const batchSize = 4;      // wie viele parallel
   const baseDelayMs = 800;  // abstand zwischen batches
 
-  this.livePollSub = interval(3000).pipe(
+  this.livePollSub = interval(800).pipe(
     startWith(0),
-    // warte, bis eine komplette runde fertig ist (alle batches), bevor die nächste startet
+    //bis eine komplette runde fertig ist (alle batches) bevor die nächste startet
     exhaustMap(() =>
       from(nums).pipe(
         bufferCount(batchSize),
@@ -235,7 +234,6 @@ getLiveDriverPosition() {
     ),
     takeUntilDestroyed(this.destroyRef)
   ).subscribe((batches) => {
-    // batches: Array< Array<any[]> >  -> erst batches, dann arrays je fahrer
     let changed = false;
     batches.forEach((resultArrays) => {
       resultArrays.forEach((arr) => {
@@ -254,14 +252,12 @@ getLiveDriverPosition() {
 }
 
   getDriverStandings$(): Observable<Standing[]> {
-    // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
     return of(standings).pipe(
       map((a) => [...a].sort((x, y) => y.points - x.points))
     );
   }
 
   getDriver$(): Observable<Driver[]> {
-    // The $ suffix is an angular/ts convention indicating that the value is an observable that should be subscribed to or consumed using async in the template
     return of(driver).pipe(
       map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
     );

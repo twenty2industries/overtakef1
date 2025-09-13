@@ -31,7 +31,6 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
         ),
       ]),
     ]),
-    // <<< NEU: smooth vertical move >>>
     trigger('verticalMove', [
       transition('* => *', [
         animate('400ms ease-in-out', style({ transform: 'translateY(0)' })),
@@ -51,7 +50,6 @@ export class DriverStandingsComponent {
 
   driversSimSorted$!: Observable<Driver[]>;
 
-  // <<< NEW: einfacher Modus-Schalter >>>
   useSimulation: boolean = false; // true = Simulation, false = Live
 
   constructor(public standingsDataService: StandingsDataService) {
@@ -65,7 +63,6 @@ export class DriverStandingsComponent {
     );
   }
 
-
   ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
       this.races = data;
@@ -75,10 +72,11 @@ export class DriverStandingsComponent {
     }
   }
 
-  sortWithLiveData(){
-    this.driversSimSorted$ = combineLatest([ // LIVEDATA SORTING OPTION 
+  sortWithLiveData() {
+    this.driversSimSorted$ = combineLatest([
+      // LIVEDATA SORTING OPTION
       this.driver$,
-      this.standingsDataService.driverStandingMap$, // sorting option 
+      this.standingsDataService.driverStandingMap$, // sorting option
     ]).pipe(
       map(([drivers, mapObj]) =>
         [...drivers].sort((a, b) => {
@@ -87,13 +85,13 @@ export class DriverStandingsComponent {
           return pa - pb;
         })
       )
-    ); 
+    );
   }
 
-  sortWithNewestData(){
-      this.driversSimSorted$ = combineLatest([
+  sortWithNewestData() {
+    this.driversSimSorted$ = combineLatest([
       this.driver$,
-      this.standingsDataService.driverStandingMap$, // sorting option 
+      this.standingsDataService.driverStandingMap$, // sorting option
     ]).pipe(
       map(([drivers, mapObj]) =>
         [...drivers].sort((a, b) => {
@@ -107,7 +105,12 @@ export class DriverStandingsComponent {
 
   startSim(speed: number = 1) {
     this.sortWithLiveData();
-    this.standingsDataService.loadSimulation(9912, true, speed, '2025-09-07T13:00:00Z');
+    this.standingsDataService.loadSimulation(
+      9912,
+      true,
+      speed,
+      '2025-09-07T13:00:00Z'
+    );
   }
 
   pauseSim() {
