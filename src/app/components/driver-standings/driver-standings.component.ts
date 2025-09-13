@@ -2,41 +2,39 @@ import { Component, Input, Signal } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
-import standings from '../../../data/standings.json';
-import constructor from '../../../data/constructor.json';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
 import { combineLatest, map, Observable, delay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.component';
+import { FlipDirective } from '../../shared/flip.directive';
 
 @Component({
   selector: 'app-driver-standings',
-  imports: [AsyncPipe, DriverFullcardComponent, DatePipe],
+  imports: [AsyncPipe, DriverFullcardComponent, DatePipe, FlipDirective],
   templateUrl: './driver-standings.component.html',
   styleUrl: './driver-standings.component.scss',
-  animations: [
-    trigger('fadeSlide', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(20px)' }),
-        animate(
-          '300ms ease-out',
-          style({ opacity: 1, transform: 'translateX(0)' })
-        ),
-      ]),
-      transition(':leave', [
-        animate(
-          '300ms ease-in',
-          style({ opacity: 0, transform: 'translateX(-20px)' })
-        ),
-      ]),
+animations: [
+  trigger('fadeSlide', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('200ms ease-out', style({ opacity: 1 }))
     ]),
-    trigger('verticalMove', [
-      transition('* => *', [
-        animate('400ms ease-in-out', style({ transform: 'translateY(0)' })),
-      ]),
+    transition(':leave', [
+      animate('200ms ease-in', style({ opacity: 0 }))
     ]),
-  ],
+  ]),
+  trigger('verticalMove', [
+    transition(':increment', [
+      style({ transform: 'translateY(-100px)' }),
+      animate('500ms ease-in-out', style({ transform: 'translateY(0)' }))
+    ]),
+    transition(':decrement', [
+      style({ transform: 'translateY(100px)' }),
+      animate('500ms ease-in-out', style({ transform: 'translateY(0)' }))
+    ]),
+  ]),
+],
 })
 export class DriverStandingsComponent {
   races: any[] = [];

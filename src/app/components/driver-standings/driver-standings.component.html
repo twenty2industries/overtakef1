@@ -8,7 +8,7 @@
         (click)="constructorActive = true; driverActive = false"
         [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
         <div class="test-buttons-container">
-        <button id="test-button" (click)="startSim(1)">Test</button>
+        <button id="test-button" (click)="startSim(5)">Test</button>
                 <button id="test-button" (click)="standingsDataService.stopSimulation()">cancel</button>
 
 
@@ -39,14 +39,18 @@
             </div>
           }
         </div>
-
-        } @case ('driver-standing') {
+      } 
+        @case ('driver-standing') {
           <div class="fade-wrapper" @fadeSlide>
-<!--             @for (driver of (driver$ | async); track $index) {
- -->              
-@for (driver of (driversSimSorted$ | async); track $index) {
- <div (click)="standingsDataService.openDriverFullCard(driver)"  class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'"   @fadeSlide
-     @verticalMove>
+            @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
+              <div
+                (click)="standingsDataService.openDriverFullCard(driver)"
+                class="driver-cards"
+                              [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'"
+
+                appFlip
+                @fadeSlide
+                [@verticalMove]="(standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position ?? 99">
                 <div class="driver-number-container">
                   <h1>{{ driver.base.driverNumber}}</h1>
                 </div>
@@ -61,13 +65,12 @@
                   <div class="points-wrapper">
                     <div class="position">Pos. {{$index + 1}}</div>
                     <div class="driver-points">{{driver.season.points}} PTS</div>
-                  <span class="simulation-test">MONZA Simulation x2 Position: {{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</span>
-                  <span class="simulation-test"> Zeit: {{ (standingsDataService.simTime$ | async) | date:'HH:mm:ss' }}</span>
-                </div>
+                    <span class="simulation-test">MONZA Simulation x2 Position: {{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</span>
+                    <span class="simulation-test"> Zeit: {{ (standingsDataService.simTime$ | async) | date:'HH:mm:ss' }}</span>
+                  </div>
                   <div class="driver-image-container">
                     <img class="driver" [src]="driver.base.assets.image">
                   </div>
-                  
                 </div>
               </div>
             }
@@ -75,36 +78,39 @@
         }
       @default {
           <div class="fade-wrapper" @fadeSlide>
-<!--             @for (driver of (driver$ | async); track $index) {
--->              
-        @for (driver of (driversSimSorted$ | async); track $index) {
-              <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards" [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'"   @fadeSlide
-              @verticalMove>
-                <div class="driver-number-container">
-                  <h1>{{ driver.base.driverNumber}}</h1>
-                </div>
-                <div class="team-driver-name">
-                  <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
-                  <div class="hyphen"></div>
-                  <div class="driver-name">
-                    <div class="first-name">{{driver.base.driverName}}</div>
-                  </div>
-                </div>
-                <div class="position-points">
-                  <div class="points-wrapper">
-                    <div class="position">Pos. {{$index + 1}}</div>
-                    <div class="driver-points">{{driver.season.points}} PTS</div>
-                  <span class="simulation-test">MONZA Simulation x2 Position: {{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</span>
-                  <span class="simulation-test"> Zeit: {{ (standingsDataService.simTime$ | async) | date:'HH:mm:ss' }}</span>
-                  </div>
-                  <div class="driver-image-container">
-                    <img class="driver" [src]="driver.base.assets.image">
-                  </div>
-                  
+            @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
+              <div
+                (click)="standingsDataService.openDriverFullCard(driver)"
+                class="driver-cards"
+                              [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'"
+
+                appFlip
+                @fadeSlide
+                [@verticalMove]="(standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position ?? 99">
+              <div class="driver-number-container">
+                <h1>{{ driver.base.driverNumber}}</h1>
+              </div>
+              <div class="team-driver-name">
+                <div class="team-logo"><img [src]="driver.base.assets.teamLogo"></div>
+                <div class="hyphen"></div>
+                <div class="driver-name">
+                  <div class="first-name">{{driver.base.driverName}}</div>
                 </div>
               </div>
-            }
-          </div>
+              <div class="position-points">
+                <div class="points-wrapper">
+                  <div class="position">Pos. {{$index + 1}}</div>
+                  <div class="driver-points">{{driver.season.points}} PTS</div>
+                  <span class="simulation-test">MONZA Simulation x2 Position: {{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</span>
+                  <span class="simulation-test"> Zeit: {{ (standingsDataService.simTime$ | async) | date:'HH:mm:ss' }}</span>
+                </div>
+                <div class="driver-image-container">
+                  <img class="driver" [src]="driver.base.assets.image">
+                </div>
+              </div>
+            </div>
+          }
+        </div> 
         }
       }
     </div>

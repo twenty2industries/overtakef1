@@ -49,18 +49,17 @@ export class StandingsDataService {
   public simTimerSub?: Subscription;
   private simSpeed = 1; // 0.5, 1, 2, 4
 
-  private simCurrentTs = 0; // ms since epoch
+  private simCurrentTs: number = 0; // ms since epoch
 
-  private loadedDrivers = new Set<number>();
+  private loadedDrivers: number = 0;
 
   private simMode = false;
   private livePollSub?: Subscription;
 
-  private simTimeSubject = new BehaviorSubject<number>(0); 
+  private simTimeSubject = new BehaviorSubject<number>(0);
   public simTime$ = this.simTimeSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   loadSimulation(
     sessionKey: number,
@@ -107,7 +106,7 @@ export class StandingsDataService {
       )
       .subscribe((resultArrays) => {
         resultArrays.forEach((arr) => {
-          const sorted = [...arr].sort( 
+          const sorted = [...arr].sort(
             (a, b) => +new Date(a.date) - +new Date(b.date)
           );
           if (sorted.length) {
@@ -117,21 +116,24 @@ export class StandingsDataService {
             minTs = Math.min(minTs, +new Date(sorted[0].date));
           }
         });
+        this.loadedDrivers += 5;
+        console.log('Loaded Count' + this.loadedDrivers + nums.length);
+        if (this.loadedDrivers >= nums.length) {
+          if (Object.keys(this.simData).length) {
+            this.simCurrentTs = isFinite(minTs) ? minTs : 0;
+            this.simTimeSubject.next(this.simCurrentTs); // << zeit initial emitten
+            for (const k in this.simData)
+              this.driverStandingCache[+k] = this.simData[+k][0];
+            this.driverStandingMapSubject.next({ ...this.driverStandingCache });
 
-        if (Object.keys(this.simData).length) {
-          this.simCurrentTs = isFinite(minTs) ? minTs : 0;
-          this.simTimeSubject.next(this.simCurrentTs); // << zeit initial emitten
-          for (const k in this.simData)
-            this.driverStandingCache[+k] = this.simData[+k][0];
-          this.driverStandingMapSubject.next({ ...this.driverStandingCache });
+            if (startAtIso) {
+              this.seekSimulation(startAtIso);
+              this.simTimeSubject.next(this.simCurrentTs);
+            }
 
-          if (startAtIso) { 
-            this.seekSimulation(startAtIso); 
-            this.simTimeSubject.next(this.simCurrentTs); 
-          }
-
-          if (autoStart && !this.simTimerSub) {
-            this.startSimulation(speed);
+            if (autoStart && !this.simTimerSub) {
+              this.startSimulation(speed);
+            }
           }
         }
       });
@@ -164,7 +166,7 @@ export class StandingsDataService {
       }
       if (changed)
         this.driverStandingMapSubject.next({ ...this.driverStandingCache });
-        this.simTimeSubject.next(this.simCurrentTs); // << zeit emitten
+      this.simTimeSubject.next(this.simCurrentTs); // << zeit emitten
     });
   }
 
@@ -193,63 +195,69 @@ export class StandingsDataService {
     this.driverStandingMapSubject.next({ ...this.driverStandingCache });
   }
 
-getLiveDriverPosition() {
-  if (this.simMode) return; // simulation hat vorrang
-  if (this.livePollSub) { this.livePollSub.unsubscribe(); this.livePollSub = undefined; }
+  getLiveDriverPosition() {
+    if (this.simMode) return; // simulation hat vorrang
+    if (this.livePollSub) {
+      this.livePollSub.unsubscribe();
+      this.livePollSub = undefined;
+    }
 
-  const nums = driver.map((d) => d.base.driverNumber);
-  const batchSize = 4;      // wie viele parallel
-  const baseDelayMs = 800;  // abstand zwischen batches
+    const nums = driver.map((d) => d.base.driverNumber);
+    const batchSize = 4; // wie viele parallel
+    const baseDelayMs = 800; // abstand zwischen batches
 
-  this.livePollSub = interval(800).pipe(
-    startWith(0),
-    //bis eine komplette runde fertig ist (alle batches) bevor die nächste startet
-    exhaustMap(() =>
-      from(nums).pipe(
-        bufferCount(batchSize),
-        concatMap((chunk, i) =>
-          forkJoin(
-            chunk.map((n) =>
-              this.http
-                .get<any[]>(
-                  `https://api.openf1.org/v1/position?session_key=latest&driver_number=${n}`
-                )
-                .pipe(
-                  retryWhen((err$) =>
-                    err$.pipe(
-                      scan((acc, err) => {
-                        if (err.status !== 429 || acc >= 2) throw err;
-                        return acc + 1;
-                      }, 0),
-                      delayWhen((retry) => timer((retry + 1) * 1000)) // 1s, 2s backoff
+    this.livePollSub = interval(800)
+      .pipe(
+        startWith(0),
+        //bis eine komplette runde fertig ist (alle batches) bevor die nächste startet
+        exhaustMap(() =>
+          from(nums).pipe(
+            bufferCount(batchSize),
+            concatMap((chunk, i) =>
+              forkJoin(
+                chunk.map((n) =>
+                  this.http
+                    .get<any[]>(
+                      `https://api.openf1.org/v1/position?session_key=latest&driver_number=${n}`
                     )
-                  ),
-                  catchError(() => of([]))
+                    .pipe(
+                      retryWhen((err$) =>
+                        err$.pipe(
+                          scan((acc, err) => {
+                            if (err.status !== 429 || acc >= 2) throw err;
+                            return acc + 1;
+                          }, 0),
+                          delayWhen((retry) => timer((retry + 1) * 1000)) // 1s, 2s backoff
+                        )
+                      ),
+                      catchError(() => of([]))
+                    )
                 )
-            )
-          ).pipe(delayWhen(() => timer(i * baseDelayMs)))
+              ).pipe(delayWhen(() => timer(i * baseDelayMs)))
+            ),
+            toArray() // sammelt alle batch-ergebnisse dieser runde
+          )
         ),
-        toArray() // sammelt alle batch-ergebnisse dieser runde
+        takeUntilDestroyed(this.destroyRef)
       )
-    ),
-    takeUntilDestroyed(this.destroyRef)
-  ).subscribe((batches) => {
-    let changed = false;
-    batches.forEach((resultArrays) => {
-      resultArrays.forEach((arr) => {
-        const latest = arr?.[arr.length - 1] ?? null;
-        if (latest && latest.driver_number != null) {
-          this.driverStandingCache[latest.driver_number] = latest;
-          this.driverStanding = latest;
-          changed = true;
-        }
+      .subscribe((batches) => {
+        let changed = false;
+        batches.forEach((resultArrays) => {
+          resultArrays.forEach((arr) => {
+            const latest = arr?.[arr.length - 1] ?? null;
+            if (latest && latest.driver_number != null) {
+              this.driverStandingCache[latest.driver_number] = latest;
+              this.driverStanding = latest;
+              changed = true;
+            }
+          });
+        });
+        if (changed)
+          this.driverStandingMapSubject.next({ ...this.driverStandingCache });
+        // optional: progress
+        // console.log('live drivers updated:', Object.keys(this.driverStandingCache).length);
       });
-    });
-    if (changed) this.driverStandingMapSubject.next({ ...this.driverStandingCache });
-    // optional: progress
-    // console.log('live drivers updated:', Object.keys(this.driverStandingCache).length);
-  });
-}
+  }
 
   getDriverStandings$(): Observable<Standing[]> {
     return of(standings).pipe(
