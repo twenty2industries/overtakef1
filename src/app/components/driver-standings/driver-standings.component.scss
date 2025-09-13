@@ -8,6 +8,7 @@ section {
   margin-bottom: 10vh;
 
   .select-menu {
+    background-color: black;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -239,6 +240,17 @@ app-driver-fullcard {
 
 }
 
+.test-buttons-container{
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  #test-button{
+    height: auto;
+    background-color: red;
+    border: black 2px solid;
+    width: auto;
+  }
+}
 
 .simulation-test{
   font-size: 11px;
