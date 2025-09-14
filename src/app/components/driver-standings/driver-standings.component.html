@@ -2,13 +2,14 @@
   @defer (when loaded()) {
     <div class="select-menu">
       <button (click)="openMenu= 'driver-standing'" [class.button-active]="driverActive"
-        (click)="driverActive = true;constructorActive = false "
+        (click)="driverActive = true; constructorActive = false; simView = false"
         [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-1.jpg)'">DRIVERS</button>
       <button (click)="openMenu = 'constructor-standing'" [class.button-active]="constructorActive"
-        (click)="constructorActive = true; driverActive = false"
+        (click)="constructorActive = true; driverActive = false; simView = false"
         [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
         <div class="test-buttons-container">
-          <button id="test-button" (click)="startSim(5)">Test</button>
+          <button id="test-button" (click)="startSim(5)" [disabled]="standingsDataService.simMode">Test</button>
+          <button id="test-button" (click)="toggleSimView()">RACE</button>
           <button id="test-button" (click)="standingsDataService.stopSimulation()">cancel</button>
         </div>
 
@@ -70,7 +71,40 @@
             }
           </div>
         }
-      @default {
+        @case ('live-standings') {
+          <div class="fade-wrapper" @fadeSlide>
+            @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
+              <div
+                (click)="standingsDataService.openDriverFullCard(driver)"
+                class="driver-cards"
+                [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'" @fadeSlide
+                [class.sim-view]="simView" [class.flex-direction-unset]="simView" [@verticalMove]="(standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position ?? 99">
+              <div class="driver-number-container" [class.d_none]="simView">
+                <h1>{{ driver.base.driverNumber}}</h1>
+              </div>
+              <div class="team-driver-name">
+                <div class="team-logo" [class.d_none]="simView"><img [class.d_none]="simView" [src]="driver.base.assets.teamLogo"></div>
+                <div class="hyphen"></div>
+                <div class="driver-name">
+                  <div class="first-name" [class.first-name-live]="simView">{{driver.base.driverName}}</div>
+                </div>
+              </div>
+              <div class="position-points" [class.position-points-live]="simView">
+                <div class="points-wrapper">
+                  <div class="position" [class.d_none]="simView" >Pos. {{$index + 1}}</div>
+                  <div class="driver-points" [class.d_none]="simView" >{{driver.season.points}} PTS</div>
+                  <span class="simulation-test">MONZA Simulation x2 Position: {{ (standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position }}</span>
+                  <span class="simulation-test"> Zeit: {{ (standingsDataService.simTime$ | async) | date:'HH:mm:ss' }}</span>
+                </div>
+                <div class="driver-image-container">
+                  <img class="driver" [class.d_none]="simView" [src]="driver.base.assets.image">
+                </div>
+              </div>
+            </div>
+          }
+        </div> 
+        }
+        @default {
           <div class="fade-wrapper" @fadeSlide>
             @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
               <div
@@ -104,6 +138,7 @@
         </div> 
         }
       }
+      
     </div>
   }
 

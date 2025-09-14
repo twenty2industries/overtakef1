@@ -53,7 +53,7 @@ export class StandingsDataService {
 
   private loadedDrivers: number = 0;
 
-  private simMode = false;
+  simMode = false;
   private livePollSub?: Subscription;
 
   private simTimeSubject = new BehaviorSubject<number>(0);

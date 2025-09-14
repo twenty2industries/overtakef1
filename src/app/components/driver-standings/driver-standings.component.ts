@@ -124,4 +124,10 @@ export class DriverStandingsComponent {
   trackByDriver(index: number, d: Driver) {
     return d.base.driverNumber;
   }
+
+  toggleSimView(){
+    this.simView = !this.simView
+    this.openMenu = 'live-standing'
+    console.log(this.simView + 'current status');
+  }
 }
