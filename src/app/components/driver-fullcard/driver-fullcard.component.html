@@ -1,3 +1,4 @@
+  @defer (when loaded()) {
   @if(driver){
     <section @fadeSlide [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
 
@@ -127,17 +128,13 @@
     </div>
     </section>
   }
-
-  @if (team) {
+  @else if (team) {
     <section @fadeSlide [style.background]="'linear-gradient(to right, ' + team.teamColor + ', transparent)'">
       <div class="driver-team">
         <img [src]="team.logoPath">
       </div>
       <div class="img-car-container-fullcard">
         <img [src]="team.carImage">
-        <div class="name-container">
-          <h3>{{driver.base.driverName}}</h3>
-        </div>
       </div>
       <div class="driver-input">
             <div class="base-container">
@@ -145,31 +142,24 @@
                 <h3>Driver Stats</h3>
                 <div class="details">
                   <p>GP entered</p>
-                  <span>{{driver.career.gp.races}}</span>
                 </div>
                 <div class="details">
                   <p>Wins</p>
-                  <span>{{driver.career.gp.wins}}</span>
                 </div>
                 <div class="details">
                   <p>Poles</p>
-                  <span>{{driver.career.gp.poles}}</span>
                 </div>
                 <div class="details">
                   <p>Top 10s</p>
-                  <span>{{driver.career.gp.top10s}}</span>
                 </div>
                 <div class="details">
                   <p>Podiums</p>
-                  <span>{{driver.career.gp.podiums}}</span>
                 </div>
                 <div class="details">
                   <p>laps</p>
-                  <span>{{driver.career.gp.laps}}</span>
                 </div>
                 <div class="details">
                   <p>Dnf</p>
-                  <span>{{driver.career.gp.dnf}}</span>
                 </div>
               </div>
             </div>
@@ -181,5 +171,12 @@
       <button (click)="standingsDataService.closeDriverFullCard()"><</button>
     </div>
     </section>
-  }
+  } 
+}
   
+
+@placeholder {
+  <div class="f1-loading">
+    <img src="/assets/images/spinners/spinner1.gif" alt="loading" class="spin-logo">
+  </div>
+}

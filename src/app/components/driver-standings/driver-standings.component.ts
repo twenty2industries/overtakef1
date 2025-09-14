@@ -1,4 +1,4 @@
-import { Component, Input, Signal } from '@angular/core';
+import { Component, Input, Signal, effect  } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
@@ -11,7 +11,7 @@ import { FlipDirective } from '../../shared/flip.directive';
 
 @Component({
   selector: 'app-driver-standings',
-  imports: [AsyncPipe, DriverFullcardComponent, DatePipe, FlipDirective],
+  imports: [AsyncPipe, DriverFullcardComponent, DatePipe],
   templateUrl: './driver-standings.component.html',
   styleUrl: './driver-standings.component.scss',
 animations: [
@@ -26,11 +26,11 @@ animations: [
   ]),
   trigger('verticalMove', [
     transition(':increment', [
-      style({ transform: 'translateY(-100px)' }),
+      style({ transform: 'translateY(-30px)' }),
       animate('500ms ease-in-out', style({ transform: 'translateY(0)' }))
     ]),
     transition(':decrement', [
-      style({ transform: 'translateY(100px)' }),
+      style({ transform: 'translateY(30px)' }),
       animate('500ms ease-in-out', style({ transform: 'translateY(0)' }))
     ]),
   ]),
@@ -68,13 +68,12 @@ export class DriverStandingsComponent {
       this.races = data;
     });
     if (this.useSimulation) {
-      this.startSim(1); // Simulation starten
+      this.startSim(1);
     }
   }
 
   sortWithLiveData() {
     this.driversSimSorted$ = combineLatest([
-      // LIVEDATA SORTING OPTION
       this.driver$,
       this.standingsDataService.driverStandingMap$, // sorting option
     ]).pipe(
@@ -127,7 +126,15 @@ export class DriverStandingsComponent {
 
   toggleSimView(){
     this.simView = !this.simView
-    this.openMenu = 'live-standing'
+    this.openMenu = 'live-standings'
     console.log(this.simView + 'current status');
+  }
+
+  ngAfterViewInit(){
+    effect(() => {
+      if (this.loaded()) {
+          console.log('Alles geladen, jetzt anzeigen!');
+      }
+    })
   }
 }

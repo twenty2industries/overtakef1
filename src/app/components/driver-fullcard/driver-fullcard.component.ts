@@ -1,10 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import driver from '../../../data/driver.json';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
 import constructor from '../../../data/constructor.json';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
+import { combineLatest, map, Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 
 
@@ -30,18 +32,30 @@ import { StandingsDataService } from '../../shared/services/standings-data.servi
       ]),
     ]),
   ],
-
 })
+
 export class DriverFullcardComponent {
 
   driverInput: string ='career';
+  drivers$!: Observable<Standing[]>;
+  driver$!: Observable<Driver[]>;
+  constructors$!: Observable<Team[]>;
+  loaded!: Signal<boolean>;
+
 
   @Input() driver!:Driver;
 
-    @Input() team!:Team;
+  @Input() team!:Team;
 
 
   constructor(public standingsDataService: StandingsDataService){
+        this.drivers$ = this.standingsDataService.getDriverStandings$();
+    this.constructors$ = this.standingsDataService.getConstructorStandings$();
+    this.driver$ = this.standingsDataService.getDriver$();
 
+    this.loaded = toSignal(
+      combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
+      { initialValue: false }
+    );
   }
 }
