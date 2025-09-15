@@ -142,6 +142,13 @@ section {
       color: white;
     }
 
+    .live-text-container{
+      height: 20vh;
+      background-color: #fff;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+    }
+
   }
 
   .driver-image-container {
@@ -279,5 +286,7 @@ app-driver-fullcard {
 
 .driver-cards.flex-direction-unset { 
   flex-direction :  row !important; 
-} // höhere Spezifität
+}
+
+
 
