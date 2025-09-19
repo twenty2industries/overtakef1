@@ -53,7 +53,7 @@ export class StandingsDataService {
 
   private loadedDrivers: number = 0;
 
-  simMode = false;
+  simMode: boolean = false;
   private livePollSub?: Subscription;
 
   private simTimeSubject = new BehaviorSubject<number>(0);
@@ -117,7 +117,6 @@ export class StandingsDataService {
           }
         });
         this.loadedDrivers += 5;
-        console.log('Loaded Count' + this.loadedDrivers + nums.length);
         if (this.loadedDrivers >= nums.length) {
           if (Object.keys(this.simData).length) {
             this.simCurrentTs = isFinite(minTs) ? minTs : 0;
@@ -146,7 +145,6 @@ export class StandingsDataService {
       this.livePollSub.unsubscribe();
       this.livePollSub = undefined;
     }
-    this.stopSimulation();
     this.simTimerSub = interval(tickMs).subscribe(() => {
       this.simCurrentTs += tickMs * this.simSpeed;
       let changed = false;
@@ -176,6 +174,8 @@ export class StandingsDataService {
       this.simTimerSub = undefined;
     }
     this.simMode = false;
+    console.log('stopsimulation wurde ausgeführt');
+    
   }
 
   seekSimulation(targetIso: string) {

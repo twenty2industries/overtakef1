@@ -1,4 +1,4 @@
-import { Component, Input, Signal, effect  } from '@angular/core';
+import { Component, Input, Signal, effect } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
@@ -14,27 +14,25 @@ import { FlipDirective } from '../../shared/flip.directive';
   imports: [AsyncPipe, DriverFullcardComponent, DatePipe],
   templateUrl: './driver-standings.component.html',
   styleUrl: './driver-standings.component.scss',
-animations: [
-  trigger('fadeSlide', [
-    transition(':enter', [
-      style({ opacity: 0 }),
-      animate('200ms ease-out', style({ opacity: 1 }))
+  animations: [
+    trigger('fadeSlide', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate('200ms ease-in', style({ opacity: 0 }))]),
     ]),
-    transition(':leave', [
-      animate('200ms ease-in', style({ opacity: 0 }))
+    trigger('verticalMove', [
+      transition(':increment', [
+        style({ transform: 'translateY(-30px)' }),
+        animate('500ms ease-in-out', style({ transform: 'translateY(0)' })),
+      ]),
+      transition(':decrement', [
+        style({ transform: 'translateY(30px)' }),
+        animate('500ms ease-in-out', style({ transform: 'translateY(0)' })),
+      ]),
     ]),
-  ]),
-  trigger('verticalMove', [
-    transition(':increment', [
-      style({ transform: 'translateY(-30px)' }),
-      animate('500ms ease-in-out', style({ transform: 'translateY(0)' }))
-    ]),
-    transition(':decrement', [
-      style({ transform: 'translateY(30px)' }),
-      animate('500ms ease-in-out', style({ transform: 'translateY(0)' }))
-    ]),
-  ]),
-],
+  ],
 })
 export class DriverStandingsComponent {
   races: any[] = [];
@@ -49,6 +47,10 @@ export class DriverStandingsComponent {
   driversSimSorted$!: Observable<Driver[]>;
 
   useSimulation: boolean = false; // true = Simulation, false = Live
+
+  private lastPositions = new Map<number, number>();
+
+  private prevIndex = new Map<number, number>();
 
   simView: boolean = false;
 
@@ -74,16 +76,38 @@ export class DriverStandingsComponent {
 
   sortWithLiveData() {
     this.driversSimSorted$ = combineLatest([
+      // creates observable
       this.driver$,
       this.standingsDataService.driverStandingMap$, // sorting option
     ]).pipe(
-      map(([drivers, mapObj]) =>
-        [...drivers].sort((a, b) => {
-          const pa = mapObj?.[a.base.driverNumber]?.position ?? 99;
-          const pb = mapObj?.[b.base.driverNumber]?.position ?? 99;
-          return pa - pb;
-        })
-      )
+      //neccessary to use map on obseravble
+      map(([drivers, mapObj]) => {
+        const sorted = [...drivers].sort(
+          (a, b) =>
+            (mapObj?.[a.base.driverNumber]?.position ?? 99) -
+            (mapObj?.[b.base.driverNumber]?.position ?? 99)
+        );
+
+        // aktuelle Indizes merken
+        const currIndex = new Map<number, number>();
+        sorted.forEach((d, i) => currIndex.set(d.base.driverNumber, i));
+
+        // Überholungen loggen (nur Moves nach vorn)
+        sorted.forEach((d, i) => {
+          const prev = this.prevIndex.get(d.base.driverNumber);
+          if (prev !== undefined && i < prev) {
+            const overtaken = sorted[i + 1]; // direkt hinter ihm nach dem Move
+            const liveTextContainer = document.querySelector('.live-text-container');
+            if (liveTextContainer) {
+              liveTextContainer.innerHTML = ` <p>${d.base.driverName} overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
+            }
+
+          }
+        });
+
+        this.prevIndex = currIndex;
+        return sorted;
+      })
     );
   }
 
@@ -103,9 +127,13 @@ export class DriverStandingsComponent {
   }
 
   startSim(speed: number = 1) {
-    this.simView = true;
     this.sortWithLiveData();
-    this.standingsDataService.loadSimulation(9912, true, speed, '2025-09-07T13:00:00Z');
+    this.standingsDataService.loadSimulation(
+      9912,
+      true,
+      speed,
+      '2025-09-07T13:00:00Z'
+    );
   }
 
   pauseSim() {
@@ -116,25 +144,20 @@ export class DriverStandingsComponent {
     this.standingsDataService.seekSimulation(targetIso);
   }
 
-  ngOnDestroy() {
-    this.standingsDataService.stopSimulation();
-  }
-
   trackByDriver(index: number, d: Driver) {
     return d.base.driverNumber;
   }
 
-  toggleSimView(){
-    this.simView = !this.simView
-    this.openMenu = 'live-standings'
-    console.log(this.simView + 'current status');
+  toggleSimView() {
+    this.simView = !this.simView;
+    this.openMenu = 'live-standings';
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     effect(() => {
       if (this.loaded()) {
-          console.log('Alles geladen, jetzt anzeigen!');
+        console.log('Alles geladen, jetzt anzeigen!');
       }
-    })
+    });
   }
 }

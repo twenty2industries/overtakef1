@@ -8,7 +8,7 @@
       (click)="constructorActive = true; driverActive = false; simView = false"
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
     <div class="test-buttons-container">
-      <button id="test-button" (click)="startSim(5)" [disabled]="standingsDataService.simMode">Test</button>
+      <button id="test-button" (click)="startSim(5)" [disabled]="standingsDataService.simMode == true">Test</button>
       <button id="test-button" (click)="toggleSimView()">RACE</button>
       <button id="test-button" (click)="standingsDataService.stopSimulation()">cancel</button>
     </div>
@@ -104,7 +104,7 @@
       </div>
       }
       @if (simView == true) {
-      <div class="live-text-container">LIVETICKER COMPONENTS</div>
+      <div class="live-text-container" id="liveTextContainer"></div>
       }
     </div>
     }

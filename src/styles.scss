@@ -82,10 +82,10 @@
   to { opacity: 0; transform: translateY(20px); }
 }
 
-@keyframes simView {
+/* @keyframes simView {
   to   { height: 7vh; }
 }
-
+ */
 
 app-driver-fullcard.fade-out {
   animation: fadeOut 0.2s ease-in forwards;

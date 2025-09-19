@@ -257,7 +257,6 @@ app-driver-fullcard {
 
   #test-button {
     height: auto;
-    background-color: red;
     border: black 2px solid;
     width: auto;
   }
@@ -269,7 +268,8 @@ app-driver-fullcard {
 
 
 .sim-view {
-  animation: simView 0.8s ease-in forwards;
+  height: 7vh !important;
+  _animation: simView 0.8s ease-in forwards;
 }
 
 .d_none {
@@ -287,4 +287,8 @@ app-driver-fullcard {
 
 .driver-cards.flex-direction-unset {
   flex-direction: row !important;
+}
+
+.button-deactive {
+  background-color: white;
 }
