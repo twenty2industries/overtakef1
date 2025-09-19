@@ -69,7 +69,7 @@ section {
         align-items: center;
         display: flex;
         color: white;
-        font-size: 2.0em;
+        font-size: clamp(1rem, 3vw, 8em);
       }
     }
   }
@@ -83,12 +83,12 @@ section {
     height: 24vh;
 
     .team-constructor-name {
+      align-items: center;
       padding-left: 10px;
       margin-top: 10px;
-      align-items: center;
       display: flex;
       color: white;
-      font-size: 2.0em;
+      font-size: clamp(1rem, 3vw, 8em);
 
       .team-logo {
         display: flex;
@@ -107,11 +107,12 @@ section {
   .team-logo {
     display: flex;
     align-items: center;
+    width: 24%;
 
     img {
+      padding-right: 40px;
       z-index: 1;
-      width: 80px;
-      height: 40px;
+      height: clamp(2rem, 4vw, 8em);
       object-fit: contain;
       object-position: left;
     }
@@ -142,7 +143,7 @@ section {
       color: white;
     }
 
-    .live-text-container{
+    .live-text-container {
       height: 20vh;
       background-color: #fff;
       margin-bottom: 1rem;
@@ -209,7 +210,7 @@ section {
 
   img {
     width: 50dvw;
-    height: 52px;
+    height: 80%;
     _padding-left: 20px;
     object-fit: contain;
     object-position: right;
@@ -271,22 +272,19 @@ app-driver-fullcard {
   animation: simView 0.8s ease-in forwards;
 }
 
-.d_none{
+.d_none {
   font-size: 7px;
   display: none;
 }
 
-.position-points.position-points-live{
+.position-points.position-points-live {
   height: auto !important;
 }
 
-.first-name-live{
+.first-name-live {
   width: 150px;
 }
 
-.driver-cards.flex-direction-unset { 
-  flex-direction :  row !important; 
+.driver-cards.flex-direction-unset {
+  flex-direction: row !important;
 }
-
-
-
