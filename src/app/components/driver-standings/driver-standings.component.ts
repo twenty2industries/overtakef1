@@ -35,14 +35,11 @@ import { FlipDirective } from '../../shared/flip.directive';
   ],
 })
 export class DriverStandingsComponent {
-
   races: any[] = [];
 
   openMenu: string = 'drivers-standing';
 
   drivers$!: Observable<Standing[]>;
-
-  driver$!: Observable<Driver[]>;
 
   constructors$!: Observable<Team[]>;
 
@@ -52,100 +49,33 @@ export class DriverStandingsComponent {
 
   constructorActive: boolean = false;
 
-  useSimulation: boolean = false; // true = Simulation, false = Live
-
-  private lastPositions = new Map<number, number>();
-
-  private prevIndex = new Map<number, number>();
 
   simView: boolean = false;
-  
-  driversSimSorted$!: Observable<Driver[]>; // TODO: need to outsource
 
   constructor(public standingsDataService: StandingsDataService) {
-
     this.drivers$ = this.standingsDataService.getDriverStandings$();
-
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
+    this.standingsDataService.sortWithNewestData();
 
-    this.driver$ = this.standingsDataService.getDriver$(); // TODO: need to outsource
-
-    this.sortWithNewestData();
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
     );
+
+    effect(() => {
+      if (this.loaded()) {
+        console.log('Alles geladen, jetzt anzeigen!');
+      }
+    });
   }
 
   ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
       this.races = data;
     });
-    if (this.useSimulation) {
-      this.startSim(1);
+    if (this.standingsDataService.useSimulation) {
+      this.standingsDataService.startSim(1);
     }
-  }
-
-  sortWithLiveData() {
-    this.driversSimSorted$ = combineLatest([
-      // creates observable
-      this.driver$,
-      this.standingsDataService.driverStandingMap$, // sorting option
-    ]).pipe(
-      //neccessary to use map on obseravble
-      map(([drivers, mapObj]) => {
-        const sorted = [...drivers].sort(
-          (a, b) =>
-            (mapObj?.[a.base.driverNumber]?.position ?? 99) -
-            (mapObj?.[b.base.driverNumber]?.position ?? 99)
-        );
-
-        // aktuelle Indizes merken
-        const currIndex = new Map<number, number>();
-        sorted.forEach((d, i) => currIndex.set(d.base.driverNumber, i));
-
-        // Überholungen loggen (nur Moves nach vorn)
-        sorted.forEach((d, i) => {
-          const prev = this.prevIndex.get(d.base.driverNumber);
-          if (prev !== undefined && i < prev) {
-            const overtaken = sorted[i + 1]; // direkt hinter ihm nach dem Move
-            const liveTextContainer = document.querySelector('.live-text-container');
-            if (liveTextContainer) {
-              liveTextContainer.innerHTML = ` <p>${d.base.driverName} overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
-            }
-
-          }
-        });
-
-        this.prevIndex = currIndex;
-        return sorted;
-      })
-    );
-  }
-
-  sortWithNewestData() {
-    this.driversSimSorted$ = combineLatest([
-      this.driver$,
-      this.standingsDataService.driverStandingMap$, // sorting option
-    ]).pipe(
-      map(([drivers, mapObj]) =>
-        [...drivers].sort((a, b) => {
-          const pa = a.season.points ?? 0;
-          const pb = b.season.points ?? 0;
-          return pb - pa;
-        })
-      )
-    );
-  }
-
-  startSim(speed: number = 1) {
-    this.sortWithLiveData();
-    this.standingsDataService.loadSimulation(
-      9912,
-      true,
-      speed,
-      '2025-09-07T13:00:00Z'
-    );
   }
 
   pauseSim() {
@@ -163,13 +93,5 @@ export class DriverStandingsComponent {
   toggleSimView() {
     this.simView = !this.simView;
     this.openMenu = 'live-standings';
-  }
-
-  ngAfterViewInit() {
-    effect(() => {
-      if (this.loaded()) {
-        console.log('Alles geladen, jetzt anzeigen!');
-      }
-    });
   }
 }

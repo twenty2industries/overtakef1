@@ -8,7 +8,7 @@
       (click)="constructorActive = true; driverActive = false; simView = false"
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
     <div class="test-buttons-container">
-      <button id="test-button" (click)="startSim(5)" [disabled]="standingsDataService.simMode == true">Test</button>
+      <button id="test-button" (click)="standingsDataService.startSim(5)" [disabled]="standingsDataService.simMode == true">Test</button>
       <button id="test-button" (click)="toggleSimView()">RACE</button>
       <button id="test-button" (click)="standingsDataService.stopSimulation()">cancel</button>
     </div>
@@ -41,7 +41,7 @@
     }
     @case ('driver-standing') {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
+      @for (driver of (standingsDataService.driversSimSorted$ | async); track trackByDriver($index, driver)) {
       <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards"
         [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'" @fadeSlide
         [@verticalMove]="(standingsDataService.driverStandingMap$ | async)?.[driver.base.driverNumber]?.position ?? 99">
@@ -73,7 +73,7 @@
     }
     @case ('live-standings') {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
+      @for (driver of (standingsDataService.driversSimSorted$| async); track trackByDriver($index, driver)) {
       <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards"
         [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'" @fadeSlide
         [class.sim-view]="simView" [class.flex-direction-unset]="simView"
@@ -111,7 +111,7 @@
 
     @default {
     <div class="fade-wrapper" @fadeSlide>
-      @for (driver of (driversSimSorted$ | async); track trackByDriver($index, driver)) {
+      @for (driver of (standingsDataService.driversSimSorted$ | async); track trackByDriver($index, driver)) {
       <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards"
         [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'" @fadeSlide
         [class.sim-view]="simView" [class.flex-direction-unset]="simView"

@@ -7,6 +7,7 @@ import {
   forkJoin,
   startWith,
   catchError,
+  combineLatest,
 } from 'rxjs';
 import {
   from,
@@ -59,6 +60,17 @@ export class StandingsDataService {
   private simTimeSubject = new BehaviorSubject<number>(0);
   public simTime$ = this.simTimeSubject.asObservable();
 
+  driversSimSorted$!: Observable<Driver[]>; // TODO: need to extract
+
+  private prevIndex = new Map<number, number>();
+
+  public useSimulation: boolean = false; // true = Simulation, false = Live
+
+
+  driver$ = of(driver).pipe(
+    map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
+  );
+  
   constructor(private http: HttpClient) {}
 
   loadSimulation(
@@ -175,7 +187,6 @@ export class StandingsDataService {
     }
     this.simMode = false;
     console.log('stopsimulation wurde ausgeführt');
-    
   }
 
   seekSimulation(targetIso: string) {
@@ -307,41 +318,63 @@ export class StandingsDataService {
     document.body.classList.remove('modal-open');
   }
 
-/*   
-    sortWithLiveData() {
-      this.driversSimSorted$ = combineLatest([
-        // creates observable
-        this.driver$,
-        this.standingsDataService.driverStandingMap$, // sorting option
-      ]).pipe(
-        //neccessary to use map on obseravble
-        map(([drivers, mapObj]) => {
-          const sorted = [...drivers].sort(
-            (a, b) =>
-              (mapObj?.[a.base.driverNumber]?.position ?? 99) -
-              (mapObj?.[b.base.driverNumber]?.position ?? 99)
-          );
-  
-          // aktuelle Indizes merken
-          const currIndex = new Map<number, number>();
-          sorted.forEach((d, i) => currIndex.set(d.base.driverNumber, i));
-  
-          // Überholungen loggen (nur Moves nach vorn)
-          sorted.forEach((d, i) => {
-            const prev = this.prevIndex.get(d.base.driverNumber);
-            if (prev !== undefined && i < prev) {
-              const overtaken = sorted[i + 1]; // direkt hinter ihm nach dem Move
-              const liveTextContainer = document.querySelector('.live-text-container');
-              if (liveTextContainer) {
-                liveTextContainer.innerHTML = ` <p>${d.base.driverName} overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
-              }
-  
+  sortWithLiveData() {
+    this.driversSimSorted$ = combineLatest([
+      // creates observable
+      this.driver$,
+      this.driverStandingMap$, // sorting option
+    ]).pipe(
+      //neccessary to use map on obseravble
+      map(([drivers, mapObj]) => {
+        const sorted = [...drivers].sort(
+          (a, b) =>
+            (mapObj?.[a.base.driverNumber]?.position ?? 99) -
+            (mapObj?.[b.base.driverNumber]?.position ?? 99)
+        );
+
+        // aktuelle Indizes merken
+        const currIndex = new Map<number, number>();
+        sorted.forEach((d, i) => currIndex.set(d.base.driverNumber, i));
+
+        // Überholungen loggen (nur Moves nach vorn)
+        sorted.forEach((d, i) => {
+          const prev = this.prevIndex.get(d.base.driverNumber);
+          if (prev !== undefined && i < prev) {
+            const overtaken = sorted[i + 1]; // direkt hinter ihm nach dem Move
+            const liveTextContainer = document.querySelector(
+              '.live-text-container'
+            );
+            if (liveTextContainer) {
+              liveTextContainer.innerHTML = ` <p>${
+                d.base.driverName
+              } overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
             }
-          });
-  
-          this.prevIndex = currIndex;
-          return sorted;
+          }
+        });
+
+        this.prevIndex = currIndex;
+        return sorted;
+      })
+    );
+  }
+
+  sortWithNewestData() {
+    this.driversSimSorted$ = combineLatest([
+      this.driver$,
+      this.driverStandingMap$, // sorting option
+    ]).pipe(
+      map(([drivers, mapObj]) =>
+        [...drivers].sort((a, b) => {
+          const pa = a.season.points ?? 0;
+          const pb = b.season.points ?? 0;
+          return pb - pa;
         })
-      );
-    } */
+      )
+    );
+  }
+
+  startSim(speed: number = 1) {
+    this.sortWithLiveData();
+    this.loadSimulation(9912, true, speed, '2025-09-07T13:00:00Z');
+  }
 }
