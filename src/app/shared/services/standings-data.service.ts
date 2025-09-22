@@ -306,4 +306,42 @@ export class StandingsDataService {
     }
     document.body.classList.remove('modal-open');
   }
+
+/*   
+    sortWithLiveData() {
+      this.driversSimSorted$ = combineLatest([
+        // creates observable
+        this.driver$,
+        this.standingsDataService.driverStandingMap$, // sorting option
+      ]).pipe(
+        //neccessary to use map on obseravble
+        map(([drivers, mapObj]) => {
+          const sorted = [...drivers].sort(
+            (a, b) =>
+              (mapObj?.[a.base.driverNumber]?.position ?? 99) -
+              (mapObj?.[b.base.driverNumber]?.position ?? 99)
+          );
+  
+          // aktuelle Indizes merken
+          const currIndex = new Map<number, number>();
+          sorted.forEach((d, i) => currIndex.set(d.base.driverNumber, i));
+  
+          // Überholungen loggen (nur Moves nach vorn)
+          sorted.forEach((d, i) => {
+            const prev = this.prevIndex.get(d.base.driverNumber);
+            if (prev !== undefined && i < prev) {
+              const overtaken = sorted[i + 1]; // direkt hinter ihm nach dem Move
+              const liveTextContainer = document.querySelector('.live-text-container');
+              if (liveTextContainer) {
+                liveTextContainer.innerHTML = ` <p>${d.base.driverName} overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
+              }
+  
+            }
+          });
+  
+          this.prevIndex = currIndex;
+          return sorted;
+        })
+      );
+    } */
 }

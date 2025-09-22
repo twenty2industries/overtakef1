@@ -35,16 +35,22 @@ import { FlipDirective } from '../../shared/flip.directive';
   ],
 })
 export class DriverStandingsComponent {
-  races: any[] = [];
-  openMenu: string = 'drivers-standing';
-  drivers$!: Observable<Standing[]>;
-  driver$!: Observable<Driver[]>;
-  constructors$!: Observable<Team[]>;
-  loaded!: Signal<boolean>;
-  driverActive: boolean = true;
-  constructorActive: boolean = false;
 
-  driversSimSorted$!: Observable<Driver[]>;
+  races: any[] = [];
+
+  openMenu: string = 'drivers-standing';
+
+  drivers$!: Observable<Standing[]>;
+
+  driver$!: Observable<Driver[]>;
+
+  constructors$!: Observable<Team[]>;
+
+  loaded!: Signal<boolean>;
+
+  driverActive: boolean = true;
+
+  constructorActive: boolean = false;
 
   useSimulation: boolean = false; // true = Simulation, false = Live
 
@@ -53,11 +59,17 @@ export class DriverStandingsComponent {
   private prevIndex = new Map<number, number>();
 
   simView: boolean = false;
+  
+  driversSimSorted$!: Observable<Driver[]>; // TODO: need to outsource
 
   constructor(public standingsDataService: StandingsDataService) {
+
     this.drivers$ = this.standingsDataService.getDriverStandings$();
+
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
-    this.driver$ = this.standingsDataService.getDriver$();
+
+    this.driver$ = this.standingsDataService.getDriver$(); // TODO: need to outsource
+
     this.sortWithNewestData();
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
