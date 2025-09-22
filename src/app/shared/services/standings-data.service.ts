@@ -74,7 +74,7 @@ export class StandingsDataService {
   constructor(private http: HttpClient) {}
 
   loadSimulation(
-    sessionKey: number,
+    sessionKey: number | string,
     autoStart: boolean = false,
     speed: number = 1,
     startAtIso?: string
@@ -345,7 +345,7 @@ export class StandingsDataService {
               '.live-text-container'
             );
             if (liveTextContainer) {
-              liveTextContainer.innerHTML = ` <p>${
+              liveTextContainer.innerHTML += ` <p>${
                 d.base.driverName
               } overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
             }
@@ -375,6 +375,6 @@ export class StandingsDataService {
 
   startSim(speed: number = 1) {
     this.sortWithLiveData();
-    this.loadSimulation(9912, true, speed, '2025-09-07T13:00:00Z');
+    this.loadSimulation('latest', true, speed, '2025-09-21T11:00:00Z');
   }
 }

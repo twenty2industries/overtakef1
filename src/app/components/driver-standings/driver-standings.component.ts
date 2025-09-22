@@ -35,22 +35,21 @@ import { FlipDirective } from '../../shared/flip.directive';
   ],
 })
 export class DriverStandingsComponent {
-  races: any[] = [];
+  private races: any[] = [];
 
-  openMenu: string = 'drivers-standing';
+  public openMenu: string = 'drivers-standing';
 
-  drivers$!: Observable<Standing[]>;
+  public drivers$!: Observable<Standing[]>;
 
-  constructors$!: Observable<Team[]>;
+  public constructors$!: Observable<Team[]>;
 
-  loaded!: Signal<boolean>;
+  public loaded!: Signal<boolean>;
 
-  driverActive: boolean = true;
+  public driverActive: boolean = true;
 
-  constructorActive: boolean = false;
+  public constructorActive: boolean = false;
 
-
-  simView: boolean = false;
+  public simView: boolean = false;
 
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();

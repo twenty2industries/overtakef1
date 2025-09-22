@@ -1,5 +1,7 @@
 <section>
+
   @defer (when loaded()) {
+    
   <div class="select-menu">
     <button (click)="openMenu= 'driver-standing'" [class.button-active]="driverActive"
       (click)="driverActive = true; constructorActive = false; simView = false"
@@ -15,6 +17,7 @@
   </div>
 
   <div class="standing-cards">
+
     @switch (openMenu) {
     @case ('constructor-standing') {
     <div class="fade-wrapper" @fadeSlide>
@@ -73,6 +76,14 @@
     }
     @case ('live-standings') {
     <div class="fade-wrapper" @fadeSlide>
+
+      
+    
+        @if (simView == true) {
+      <div class="live-text-container" id="liveTextContainer"></div>
+      }
+
+
       @for (driver of (standingsDataService.driversSimSorted$| async); track trackByDriver($index, driver)) {
       <div (click)="standingsDataService.openDriverFullCard(driver)" class="driver-cards"
         [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'" @fadeSlide
@@ -103,9 +114,7 @@
         </div>
       </div>
       }
-      @if (simView == true) {
-      <div class="live-text-container" id="liveTextContainer"></div>
-      }
+
     </div>
     }
 
