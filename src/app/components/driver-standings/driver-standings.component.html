@@ -10,7 +10,7 @@
       (click)="constructorActive = true; driverActive = false; simView = false"
       [style.backgroundImage]="'url(/assets/images/backgrounds/button-bg-2.png)'">CONSTRUCTOR</button>
     <div class="test-buttons-container">
-      <button id="test-button" (click)="standingsDataService.startSim(5)" [disabled]="standingsDataService.simMode == true">Test</button>
+      <button id="test-button" (click)="standingsDataService.startSim(10)" [disabled]="standingsDataService.simMode == true">Test</button>
       <button id="test-button" (click)="toggleSimView()">RACE</button>
       <button id="test-button" (click)="standingsDataService.stopSimulation()">cancel</button>
     </div>
@@ -80,7 +80,11 @@
       
     
         @if (simView == true) {
-      <div class="live-text-container" id="liveTextContainer"></div>
+<div class="live-text-container">
+  @for (msg of (standingsDataService.overtakeMessages$ | async); track $index) {
+    <p>{{ msg }}</p>
+  }
+</div>
       }
 
 

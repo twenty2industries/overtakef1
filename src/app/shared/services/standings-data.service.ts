@@ -30,9 +30,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { DestroyRef, inject } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class StandingsDataService {
   selectedUser: Driver | null = null;
   selectedConstructor: Team | null = null;
@@ -66,11 +64,13 @@ export class StandingsDataService {
 
   public useSimulation: boolean = false; // true = Simulation, false = Live
 
+private overtakeMessagesSubject = new BehaviorSubject<string[]>([]);
+public overtakeMessages$ = this.overtakeMessagesSubject.asObservable();
 
   driver$ = of(driver).pipe(
     map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
   );
-  
+
   constructor(private http: HttpClient) {}
 
   loadSimulation(
@@ -318,44 +318,58 @@ export class StandingsDataService {
     document.body.classList.remove('modal-open');
   }
 
-  sortWithLiveData() {
+    sortWithLiveData() {
     this.driversSimSorted$ = combineLatest([
-      // creates observable
       this.driver$,
-      this.driverStandingMap$, // sorting option
+      this.driverStandingMap$,
     ]).pipe(
-      //neccessary to use map on obseravble
       map(([drivers, mapObj]) => {
         const sorted = [...drivers].sort(
           (a, b) =>
             (mapObj?.[a.base.driverNumber]?.position ?? 99) -
             (mapObj?.[b.base.driverNumber]?.position ?? 99)
         );
-
-        // aktuelle Indizes merken
-        const currIndex = new Map<number, number>();
-        sorted.forEach((d, i) => currIndex.set(d.base.driverNumber, i));
-
-        // Überholungen loggen (nur Moves nach vorn)
-        sorted.forEach((d, i) => {
-          const prev = this.prevIndex.get(d.base.driverNumber);
-          if (prev !== undefined && i < prev) {
-            const overtaken = sorted[i + 1]; // direkt hinter ihm nach dem Move
-            const liveTextContainer = document.querySelector(
-              '.live-text-container'
-            );
-            if (liveTextContainer) {
-              liveTextContainer.innerHTML += ` <p>${
-                d.base.driverName
-              } overtook ${overtaken.base.driverName} → P${i + 1}</p>`;
-            }
-          }
-        });
-
-        this.prevIndex = currIndex;
+        this.proccessLiveOvertakes(sorted);
         return sorted;
       })
     );
+  }
+
+  proccessLiveOvertakes(sortedDriverStanding: Array<Driver>) {
+    this.proccessOvertakeData(sortedDriverStanding);
+    this.prevIndex = this.calculateCurrentPositions(sortedDriverStanding);
+    return sortedDriverStanding;
+  }
+
+  proccessOvertakeData(overtakeData: Array<Driver>){
+        overtakeData.forEach((d, i) => {
+      const prev = this.prevIndex.get(d.base.driverNumber);
+      if (prev !== undefined && i < prev) {
+        const overtaken = overtakeData[i + 1]; // direkt hinter ihm nach dem Move
+        const liveTextContainer = document.querySelector(
+          '.live-text-container'
+        );
+        if (liveTextContainer) {
+          liveTextContainer.innerHTML = ` <p>${d.base.driverName} overtook ${
+            overtaken.base.driverName
+          } → P${i + 1}</p>`;
+        }
+      }
+    });
+  }
+
+  addOvertakeMessage(msg: string): void {
+  const current = this.overtakeMessagesSubject.getValue();
+  this.overtakeMessagesSubject.next([...current, msg]);
+}
+
+  calculateCurrentPositions(driverStandings: Array<Driver>) {
+    // aktuelle Indizes merken
+    const currentIndex = new Map<number, number>();
+    driverStandings.forEach((d, i) =>
+      currentIndex.set(d.base.driverNumber, i)
+    );
+    return currentIndex;
   }
 
   sortWithNewestData() {

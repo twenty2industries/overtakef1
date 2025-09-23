@@ -144,16 +144,21 @@ section {
 
     .live-text-container {
       overflow-y: auto;
+      font-size: 1.6em;
       z-index: 2;
       margin: 1em 0;
+      padding: 1em 1;
       position: sticky;
       top: 3px;
       height: 14vh;
       background-color: #fff;
       margin-bottom: 1rem;
       border-radius: 10px;
-    }
 
+      p{
+
+      }
+    }
   }
 
   .driver-image-container {
