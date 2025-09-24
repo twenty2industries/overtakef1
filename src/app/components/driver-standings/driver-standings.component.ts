@@ -1,4 +1,4 @@
-import { Component, Input, Signal, effect } from '@angular/core';
+import { Component, ElementRef, Input, Signal, ViewChild, effect } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
@@ -51,6 +51,7 @@ export class DriverStandingsComponent {
 
   public simView: boolean = false;
 
+
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
@@ -66,7 +67,11 @@ export class DriverStandingsComponent {
         console.log('Alles geladen, jetzt anzeigen!');
       }
     });
+
   }
+
+  @ViewChild('liveTextContainer') private scrollContainer!: ElementRef;
+
 
   ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
@@ -93,4 +98,23 @@ export class DriverStandingsComponent {
     this.simView = !this.simView;
     this.openMenu = 'live-standings';
   }
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      if (this.scrollContainer) {
+        this.scrollContainer.nativeElement.scrollTop =
+        this.scrollContainer.nativeElement.scrollHeight;
+      }
+    });
+  }
+
+  liveOvertakeMessagesSubscription() {
+    this.standingsDataService.overtakeMessages$.subscribe(() => {
+      this.scrollToBottom();
+    });
+  }
+
+  ngAfterViewInit() {
+  this.liveOvertakeMessagesSubscription();
+}
 }

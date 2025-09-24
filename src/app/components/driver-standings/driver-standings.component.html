@@ -76,16 +76,13 @@
     }
     @case ('live-standings') {
     <div class="fade-wrapper" @fadeSlide>
-
-      
-    
         @if (simView == true) {
-<div class="live-text-container">
-  @for (msg of (standingsDataService.overtakeMessages$ | async); track $index) {
-    <p>{{ msg }}</p>
-  }
-</div>
-      }
+          <div class="live-text-container" #liveTextContainer>
+            @for (msg of (standingsDataService.overtakeMessages$ | async); track $index) {
+              <p>{{ msg }}</p>
+            }
+          </div>
+        } 
 
 
       @for (driver of (standingsDataService.driversSimSorted$| async); track trackByDriver($index, driver)) {

@@ -40,34 +40,23 @@ export class StandingsDataService {
     {}
   );
   public driverStandingMap$ = this.driverStandingMapSubject.asObservable();
-
-  driverStanding?: any | null = null;
-
+  private driverStanding?: any | null = null;
   private simData: Record<number, any[]> = {};
   private simIndex: Record<number, number> = {};
   public simTimerSub?: Subscription;
   private simSpeed = 1; // 0.5, 1, 2, 4
-
   private simCurrentTs: number = 0; // ms since epoch
-
   private loadedDrivers: number = 0;
-
-  simMode: boolean = false;
+  public simMode: boolean = false;
   private livePollSub?: Subscription;
-
   private simTimeSubject = new BehaviorSubject<number>(0);
   public simTime$ = this.simTimeSubject.asObservable();
-
-  driversSimSorted$!: Observable<Driver[]>; // TODO: need to extract
-
+  public driversSimSorted$!: Observable<Driver[]>; // TODO: need to extract
   private prevIndex = new Map<number, number>();
-
   public useSimulation: boolean = false; // true = Simulation, false = Live
-
-private overtakeMessagesSubject = new BehaviorSubject<string[]>([]);
-public overtakeMessages$ = this.overtakeMessagesSubject.asObservable();
-
-  driver$ = of(driver).pipe(
+  private overtakeMessagesSubject = new BehaviorSubject<string[]>([]);
+  public overtakeMessages$ = this.overtakeMessagesSubject.asObservable();
+  private driver$ = of(driver).pipe(
     map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
   );
 
@@ -318,7 +307,7 @@ public overtakeMessages$ = this.overtakeMessagesSubject.asObservable();
     document.body.classList.remove('modal-open');
   }
 
-    sortWithLiveData() {
+  sortWithLiveData() {
     this.driversSimSorted$ = combineLatest([
       this.driver$,
       this.driverStandingMap$,
@@ -341,34 +330,27 @@ public overtakeMessages$ = this.overtakeMessagesSubject.asObservable();
     return sortedDriverStanding;
   }
 
-  proccessOvertakeData(overtakeData: Array<Driver>){
-        overtakeData.forEach((d, i) => {
+  proccessOvertakeData(overtakeData: Array<Driver>) {
+    overtakeData.forEach((d, i) => {
       const prev = this.prevIndex.get(d.base.driverNumber);
       if (prev !== undefined && i < prev) {
-        const overtaken = overtakeData[i + 1]; // direkt hinter ihm nach dem Move
-        const liveTextContainer = document.querySelector(
-          '.live-text-container'
-        );
-        if (liveTextContainer) {
-          liveTextContainer.innerHTML = ` <p>${d.base.driverName} overtook ${
-            overtaken.base.driverName
-          } → P${i + 1}</p>`;
-        }
+        const overtaken = overtakeData[i + 1]; // overtook driver position
+        const msg = `${d.base.driverName} overtook ${
+          overtaken.base.driverName
+        } → P${i + 1}`;
+        this.addOvertakeMessage(msg);
       }
     });
   }
 
   addOvertakeMessage(msg: string): void {
-  const current = this.overtakeMessagesSubject.getValue();
-  this.overtakeMessagesSubject.next([...current, msg]);
-}
+    const current = this.overtakeMessagesSubject.getValue();
+    this.overtakeMessagesSubject.next([...current, msg]);
+  }
 
   calculateCurrentPositions(driverStandings: Array<Driver>) {
-    // aktuelle Indizes merken
     const currentIndex = new Map<number, number>();
-    driverStandings.forEach((d, i) =>
-      currentIndex.set(d.base.driverNumber, i)
-    );
+    driverStandings.forEach((d, i) => currentIndex.set(d.base.driverNumber, i));
     return currentIndex;
   }
 
