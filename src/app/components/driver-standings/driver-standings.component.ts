@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, Signal, ViewChild, effect } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  Signal,
+  ViewChild,
+  effect,
+} from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
@@ -51,7 +58,6 @@ export class DriverStandingsComponent {
 
   public simView: boolean = false;
 
-
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
@@ -67,11 +73,9 @@ export class DriverStandingsComponent {
         console.log('Alles geladen, jetzt anzeigen!');
       }
     });
-
   }
 
   @ViewChild('liveTextContainer') private scrollContainer!: ElementRef;
-
 
   ngOnInit() {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
@@ -90,11 +94,11 @@ export class DriverStandingsComponent {
     this.standingsDataService.seekSimulation(targetIso);
   }
 
-  trackByDriver(index: number, d: Driver) {
+  trackByDriver(index: number, d: Driver): number {
     return d.base.driverNumber;
   }
 
-  toggleSimView() {
+  toggleSimView(): void {
     this.simView = !this.simView;
     this.openMenu = 'live-standings';
   }
@@ -103,7 +107,7 @@ export class DriverStandingsComponent {
     setTimeout(() => {
       if (this.scrollContainer) {
         this.scrollContainer.nativeElement.scrollTop =
-        this.scrollContainer.nativeElement.scrollHeight;
+          this.scrollContainer.nativeElement.scrollHeight;
       }
     });
   }
@@ -114,7 +118,7 @@ export class DriverStandingsComponent {
     });
   }
 
-  ngAfterViewInit() {
-  this.liveOvertakeMessagesSubscription();
-}
+  ngAfterViewInit(): void {
+    this.liveOvertakeMessagesSubscription();
+  }
 }
