@@ -14,7 +14,6 @@ import { StandingsDataService } from '../../shared/services/standings-data.servi
 import { combineLatest, map, Observable, delay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.component';
-import { FlipDirective } from '../../shared/flip.directive';
 
 @Component({
   selector: 'app-driver-standings',
@@ -44,6 +43,8 @@ import { FlipDirective } from '../../shared/flip.directive';
 export class DriverStandingsComponent {
   private races: any[] = [];
 
+  public currentDrivers: any[] = [];
+
   public openMenu: string = 'drivers-standing';
 
   public drivers$!: Observable<Standing[]>;
@@ -57,11 +58,13 @@ export class DriverStandingsComponent {
   public constructorActive: boolean = false;
 
   public simView: boolean = false;
+  
 
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
     this.standingsDataService.sortWithNewestData();
+
 
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
@@ -84,6 +87,10 @@ export class DriverStandingsComponent {
     if (this.standingsDataService.useSimulation) {
       this.standingsDataService.startSim(1);
     }
+
+      this.standingsDataService.getCurrentDrivers().subscribe((data: any) => {
+    this.currentDrivers = data;
+  });
   }
 
   pauseSim() {
@@ -120,5 +127,13 @@ export class DriverStandingsComponent {
 
   ngAfterViewInit(): void {
     this.liveOvertakeMessagesSubscription();
+    console.log(this.currentDriver());
+    
+  }
+
+  currentDriver(): void{
+    this.standingsDataService.getCurrentDrivers().subscribe(subDrivers => {
+      return subDrivers;
+    })
   }
 }

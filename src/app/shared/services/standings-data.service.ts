@@ -60,7 +60,16 @@ export class StandingsDataService {
     map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
   );
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
+
+  
+  getCurrentDrivers() {
+    return this.http.get(
+      'https://api.openf1.org/v1/drivers?session_key=latest'
+    );
+  }
 
   loadSimulation(
     sessionKey: number | string,
@@ -373,4 +382,5 @@ export class StandingsDataService {
     this.sortWithLiveData();
     this.loadSimulation('latest', true, speed, '2025-09-21T11:00:00Z');
   }
+
 }
