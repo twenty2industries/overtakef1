@@ -42,8 +42,9 @@ export class DriverFullcardComponent {
   constructors$!: Observable<Team[]>;
   loaded!: Signal<boolean>;
 
+  public currentDrivers: any[] = [];
 
-  @Input() driver!:Driver;
+  @Input() driver!:any;
 
   @Input() team!:Team;
 
@@ -58,4 +59,13 @@ export class DriverFullcardComponent {
       { initialValue: false }
     );
   }
+
+    ngOnInit() {
+    this.standingsDataService.getDriversWithAssets().subscribe((data: any) => {
+      this.currentDrivers = data;
+      console.log(this.currentDrivers);
+      
+    });
+  }
+
 }

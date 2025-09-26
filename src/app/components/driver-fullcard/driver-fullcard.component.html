@@ -1,12 +1,12 @@
   @defer (when loaded()) {
   @if(driver){
-    <section @fadeSlide [style.background]="'linear-gradient(to right, ' + driver.base.assets.teamColor + ', transparent)'">
+    <section @fadeSlide [style.background]="'linear-gradient(to right, ' + '#' + driver.team_colour + ', transparent)'">
 
       <div class="driver-team">
-        <img [src]="driver.base.assets.teamLogo">
+        <img [src]="driver.assets.teamLogo">
       </div>
       <div class="img-container">
-        <img [src]="driver.base.assets.image">
+        <img [src]="driver.assets.image">
         <div class="name-container">
           <h3>{{driver.base.driverName}}</h3>
         </div>

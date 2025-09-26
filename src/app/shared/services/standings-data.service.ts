@@ -393,4 +393,7 @@ private mapDriverWithAssets(apiDriver: ApiDriver) {
     this.loadSimulation('latest', true, speed, '2025-09-21T11:00:00Z');
   }
 
+  getDriverFullcardDetails(driverNumber: number) {
+    return this.http.get(`https://api.openf1.org/v1/drivers?driver_number=${driverNumber}&session_key=latest`);
+  }
 }

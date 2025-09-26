@@ -80,8 +80,6 @@ export class DriverStandingsComponent {
 
     this.standingsDataService.getDriversWithAssets().subscribe((data: any) => {
       this.currentDrivers = data;
-      console.log(this.currentDrivers);
-      
     });
   }
 
