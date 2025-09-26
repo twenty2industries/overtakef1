@@ -1,4 +1,4 @@
-import { Component, Input, Signal } from '@angular/core';
+import { Component, inject, Input, Signal } from '@angular/core';
 import driver from '../../../data/driver.json';
 import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
@@ -7,7 +7,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-
 
 
 @Component({
@@ -43,8 +42,10 @@ export class DriverFullcardComponent {
   loaded!: Signal<boolean>;
 
   public currentDrivers: any[] = [];
+    public firebaseDrivers: any[] = [];
 
   @Input() driver!:any;
+@Input() driverId!: string;
 
   @Input() team!:Team;
 
@@ -64,8 +65,8 @@ export class DriverFullcardComponent {
     this.standingsDataService.getDriversWithAssets().subscribe((data: any) => {
       this.currentDrivers = data;
       console.log(this.currentDrivers);
-      
     });
-  }
+
+}
 
 }

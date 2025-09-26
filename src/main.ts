@@ -4,8 +4,10 @@ import { AppComponent } from './app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
-
-
 bootstrapApplication(AppComponent, {
-  providers: [provideAnimations(), provideHttpClient()]
+  providers: [
+    ...appConfig.providers,  // ← DIE FIREBASE CONFIG
+    provideAnimations(), 
+    provideHttpClient()
+  ]
 });
