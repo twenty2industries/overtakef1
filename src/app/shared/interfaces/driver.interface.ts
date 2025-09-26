@@ -9,6 +9,21 @@ export interface Standing {
   driverImagePath?: string
 }
 
+export interface ApiDriver {
+  broadcast_name: string;
+  country_code: string | null;
+  driver_number: number;
+  first_name: string;
+  full_name: string;
+  headshot_url: string;
+  last_name: string;
+  meeting_key: number;
+  name_acronym: string;
+  session_key: number;
+  team_colour: string;
+  team_name: string;
+}
+
 export interface DriverBase {
   driverId: string;
   driverNumber: number;

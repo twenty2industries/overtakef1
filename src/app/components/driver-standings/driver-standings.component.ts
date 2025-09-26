@@ -42,29 +42,19 @@ import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.comp
 })
 export class DriverStandingsComponent {
   private races: any[] = [];
-
   public currentDrivers: any[] = [];
-
   public openMenu: string = 'drivers-standing';
-
   public drivers$!: Observable<Standing[]>;
-
   public constructors$!: Observable<Team[]>;
-
   public loaded!: Signal<boolean>;
-
   public driverActive: boolean = true;
-
   public constructorActive: boolean = false;
-
   public simView: boolean = false;
-  
 
   constructor(public standingsDataService: StandingsDataService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
     this.standingsDataService.sortWithNewestData();
-
 
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
@@ -88,9 +78,11 @@ export class DriverStandingsComponent {
       this.standingsDataService.startSim(1);
     }
 
-      this.standingsDataService.getCurrentDrivers().subscribe((data: any) => {
-    this.currentDrivers = data;
-  });
+    this.standingsDataService.getDriversWithAssets().subscribe((data: any) => {
+      this.currentDrivers = data;
+      console.log(this.currentDrivers);
+      
+    });
   }
 
   pauseSim() {
@@ -101,8 +93,8 @@ export class DriverStandingsComponent {
     this.standingsDataService.seekSimulation(targetIso);
   }
 
-  trackByDriver(index: number, d: Driver): number {
-    return d.base.driverNumber;
+  trackByDriver(index: number, d: any): number {
+    return d.driver_number;
   }
 
   toggleSimView(): void {
@@ -127,13 +119,5 @@ export class DriverStandingsComponent {
 
   ngAfterViewInit(): void {
     this.liveOvertakeMessagesSubscription();
-    console.log(this.currentDriver());
-    
-  }
-
-  currentDriver(): void{
-    this.standingsDataService.getCurrentDrivers().subscribe(subDrivers => {
-      return subDrivers;
-    })
   }
 }

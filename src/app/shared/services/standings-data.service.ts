@@ -20,7 +20,7 @@ import {
 } from 'rxjs';
 import { exhaustMap, map, toArray } from 'rxjs/operators';
 import { Standing } from '../interfaces/driver.interface';
-import { Driver } from '../interfaces/driver.interface';
+import { Driver, ApiDriver } from '../interfaces/driver.interface';
 import { Team } from '../interfaces//constructor.interface';
 import standings from '../../../data/standings.json';
 import driver from '../../../data/driver.json';
@@ -36,9 +36,7 @@ export class StandingsDataService {
   selectedConstructor: Team | null = null;
   private destroyRef = inject(DestroyRef);
   private driverStandingCache: Record<number, any> = {};
-  private driverStandingMapSubject = new BehaviorSubject<Record<number, any>>(
-    {}
-  );
+  private driverStandingMapSubject = new BehaviorSubject<Record<number, any>>({});
   public driverStandingMap$ = this.driverStandingMapSubject.asObservable();
   private driverStanding?: any | null = null;
   private simData: Record<number, any[]> = {};
@@ -60,16 +58,28 @@ export class StandingsDataService {
     map((a) => [...a].sort((x, y) => y.season.points - x.season.points))
   );
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
-  }
-
-  
   getCurrentDrivers() {
     return this.http.get(
       'https://api.openf1.org/v1/drivers?session_key=latest'
     );
   }
+
+getDriversWithAssets(): Observable<any[]> {
+  return this.getCurrentDrivers().pipe(
+    map(apiDrivers => Object.values(apiDrivers).map(apiDriver => this.mapDriverWithAssets(apiDriver)))
+  );
+}
+private mapDriverWithAssets(apiDriver: ApiDriver) {
+  const jsonDriver = driver.find(d => d.base.driverNumber === apiDriver.driver_number);
+  console.log(jsonDriver);
+  
+  return {
+    ...apiDriver,
+    assets: jsonDriver?.base.assets
+  };
+}
 
   loadSimulation(
     sessionKey: number | string,
