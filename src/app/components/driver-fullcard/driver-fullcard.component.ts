@@ -7,14 +7,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-
+import { FirebaseService } from '../../shared/services/firebase.service';
+import { collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-driver-fullcard',
   imports: [],
   templateUrl: './driver-fullcard.component.html',
   styleUrl: './driver-fullcard.component.scss',
-    animations: [
+  animations: [
     trigger('fadeSlide', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateX(100px)' }),
@@ -32,41 +33,44 @@ import { toSignal } from '@angular/core/rxjs-interop';
     ]),
   ],
 })
-
 export class DriverFullcardComponent {
-
-  driverInput: string ='career';
+  driverInput: string = 'career';
   drivers$!: Observable<Standing[]>;
   driver$!: Observable<Driver[]>;
   constructors$!: Observable<Team[]>;
   loaded!: Signal<boolean>;
 
   public currentDrivers: any[] = [];
-    public firebaseDrivers: any[] = [];
+  public firebaseDrivers: any[] = [];
 
-  @Input() driver!:any;
-@Input() driverId!: string;
+  @Input() driver!: any;
+  @Input() driverId!: string;
 
-  @Input() team!:Team;
+  @Input() team!: Team; 
 
 
-  constructor(public standingsDataService: StandingsDataService){
-        this.drivers$ = this.standingsDataService.getDriverStandings$();
+  firestoreItems$: any;
+
+  constructor(
+    public standingsDataService: StandingsDataService,
+    public firebaseService: FirebaseService
+  ) {
+    this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
     this.driver$ = this.standingsDataService.getDriver$();
 
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
-    );
+    ); 
+    this.firestoreItems$ = collectionData(this.firebaseService.getFirestoreCollectionDrivers())
+    console.log(this.firestoreItems$);
+    
   }
 
-    ngOnInit() {
+  ngOnInit() {
     this.standingsDataService.getDriversWithAssets().subscribe((data: any) => {
       this.currentDrivers = data;
-      console.log(this.currentDrivers);
     });
-
-}
-
+  }
 }
