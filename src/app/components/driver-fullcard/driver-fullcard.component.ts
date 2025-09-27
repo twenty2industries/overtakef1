@@ -9,10 +9,11 @@ import { combineLatest, map, Observable } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { collectionData } from '@angular/fire/firestore';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-driver-fullcard',
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './driver-fullcard.component.html',
   styleUrl: './driver-fullcard.component.scss',
   animations: [
@@ -41,13 +42,14 @@ export class DriverFullcardComponent {
   loaded!: Signal<boolean>;
 
   public currentDrivers: any[] = [];
-  public firebaseDrivers: any[] = [];
 
   @Input() driver!: any;
+
   @Input() driverId!: string;
 
-  @Input() team!: Team; 
+  @Input() team!: Team;
 
+    @Input() firebaseDrivers!: any[];
 
   firestoreItems$: any;
 
@@ -62,10 +64,7 @@ export class DriverFullcardComponent {
     this.loaded = toSignal(
       combineLatest([this.drivers$, this.constructors$]).pipe(map(() => true)),
       { initialValue: false }
-    ); 
-    this.firestoreItems$ = collectionData(this.firebaseService.getFirestoreCollectionDrivers())
-    console.log(this.firestoreItems$);
-    
+    );
   }
 
   ngOnInit() {

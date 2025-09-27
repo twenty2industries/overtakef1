@@ -11,9 +11,12 @@ import { Standing, Driver } from '../../shared/interfaces/driver.interface';
 import { Team } from '../../shared/interfaces/constructor.interface';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { StandingsDataService } from '../../shared/services/standings-data.service';
+
 import { combineLatest, map, Observable, delay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DriverFullcardComponent } from '../driver-fullcard/driver-fullcard.component';
+import { collectionData } from '@angular/fire/firestore';
+import { FirebaseService } from '../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-driver-standings',
@@ -50,8 +53,10 @@ export class DriverStandingsComponent {
   public driverActive: boolean = true;
   public constructorActive: boolean = false;
   public simView: boolean = false;
+  public firebaseDrivers: any;
+  firebaseService: any;
 
-  constructor(public standingsDataService: StandingsDataService) {
+  constructor(public standingsDataService: StandingsDataService, public firestoreService: FirebaseService) {
     this.drivers$ = this.standingsDataService.getDriverStandings$();
     this.constructors$ = this.standingsDataService.getConstructorStandings$();
     this.standingsDataService.sortWithNewestData();
@@ -74,13 +79,21 @@ export class DriverStandingsComponent {
     this.standingsDataService.get2025Races().subscribe((data: any) => {
       this.races = data;
     });
+
     if (this.standingsDataService.useSimulation) {
       this.standingsDataService.startSim(1);
     }
 
-    this.standingsDataService.getDriversWithAssets().subscribe((data: any) => {
-      this.currentDrivers = data;
-    });
+    this.standingsDataService.getDriversWithAssets().subscribe((data: any) => { this.currentDrivers = data; });
+
+  collectionData(this.firestoreService.getFirestoreCollectionDrivers()).subscribe(data => {
+    this.firebaseDrivers = data;
+    console.log('This FirebaseDrivers', this.firebaseDrivers);
+  });
+  }
+
+  firestoreItems$(firestoreItems$: any) {
+    throw new Error('Method not implemented.');
   }
 
   pauseSim() {

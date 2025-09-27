@@ -177,7 +177,7 @@
 
   @if ( standingsDataService.selectedUser) {
   <div class="overlay" (click)="standingsDataService.selectedUser = null"></div>
-  <app-driver-fullcard [driver]="standingsDataService.selectedUser"></app-driver-fullcard>
+  <app-driver-fullcard [driver]="standingsDataService.selectedUser" [firebaseDrivers]="firebaseDrivers"></app-driver-fullcard>
   }
 
   @if ( standingsDataService.selectedConstructor) {

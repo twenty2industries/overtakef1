@@ -73,8 +73,7 @@ getDriversWithAssets(): Observable<any[]> {
 }
 private mapDriverWithAssets(apiDriver: ApiDriver) {
   const jsonDriver = driver.find(d => d.base.driverNumber === apiDriver.driver_number);
-  console.log(jsonDriver);
-  
+
   return {
     ...apiDriver,
     assets: jsonDriver?.base.assets
